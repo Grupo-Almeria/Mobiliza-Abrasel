@@ -1,0 +1,155 @@
+/*
+ * tokens.css — arquivo oficial do design system Mobiliza Abrasel.
+ *
+ * Servido praticamente intacto. O ÚNICO desvio em relação ao original é a
+ * remoção da primeira linha, que era:
+ *
+ *   @import url('https://fonts.googleapis.com/css2?family=Poppins:...');
+ *
+ * O briefing exige fonte autohospedada e nenhuma requisição ao Google Fonts em
+ * runtime (seção 8). Poppins passou a ser carregada de /public/fontes, pelos
+ * @font-face declarados em app/globals.css. É a mesma fonte, nos mesmos quatro
+ * pesos — muda só a origem do arquivo.
+ *
+ * Nada mais foi alterado. Se a marca publicar uma versão nova deste arquivo,
+ * substitua-o por inteiro e repita apenas a remoção do @import.
+ */
+
+
+:root {
+  /* Cores de marca */
+  --ma-green: #00652E;
+  --ma-orange: #F58220;
+  --ma-lime: #8DC63F;
+  --ma-charcoal: #231F20;
+  --ma-cream: #F7F4EE;
+  --ma-blue: #25408F;
+  --ma-red: #B11116;
+  --ma-white: #ffffff;
+  --ma-border: rgba(35, 31, 32, .10);
+
+  /* Raio */
+  --ma-radius-sm: 12px;
+  --ma-radius-md: 20px;
+  --ma-radius-lg: 32px;
+  --ma-radius-btn: 14px;
+
+  /* Sombra */
+  --ma-shadow-card: 0 14px 40px rgba(35, 31, 32, .10);
+
+  /* Espaçamento (base 8px) */
+  --ma-space-1: 8px;
+  --ma-space-2: 16px;
+  --ma-space-3: 24px;
+  --ma-space-4: 32px;
+  --ma-space-5: 48px;
+  --ma-space-6: 64px;
+  --ma-space-7: 96px;
+
+  /* Tipografia */
+  --ma-font-sans: Poppins, Inter, Arial, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ma-font-sans);
+  color: var(--ma-charcoal);
+  background: var(--ma-white);
+}
+
+.ma-container {
+  width: min(1280px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+/* Tipografia */
+.ma-h1 {
+  font: 700 clamp(2.25rem, 5vw, 4.75rem) / 0.98 var(--ma-font-sans);
+  margin: 0;
+}
+
+.ma-h2 {
+  font: 700 clamp(1.75rem, 3vw, 3rem) / 1.08 var(--ma-font-sans);
+  margin: 0;
+}
+
+.ma-h3 {
+  font: 600 clamp(1.375rem, 2vw, 1.75rem) / 1.25 var(--ma-font-sans);
+  margin: 0;
+}
+
+.ma-body {
+  font: 400 clamp(1rem, 1vw, 1.125rem) / 1.55 var(--ma-font-sans);
+  margin: 0;
+}
+
+.ma-eyebrow {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font: 600 0.8125rem / 1.2 var(--ma-font-sans);
+  color: var(--ma-green);
+  margin: 0;
+}
+
+/* Botões */
+.ma-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: var(--ma-radius-btn);
+  font: 600 1rem/1 var(--ma-font-sans);
+  cursor: pointer;
+}
+
+.ma-btn--primary {
+  background: var(--ma-green);
+  color: var(--ma-white);
+}
+
+.ma-btn--accent {
+  background: var(--ma-orange);
+  color: var(--ma-charcoal);
+}
+
+/* Cards */
+.ma-card {
+  background: var(--ma-white);
+  border: 1px solid var(--ma-border);
+  border-radius: var(--ma-radius-md);
+  box-shadow: var(--ma-shadow-card);
+  padding: var(--ma-space-4);
+}
+
+.ma-card--institutional {
+  background: var(--ma-green);
+  color: var(--ma-white);
+  border: 0;
+  box-shadow: none;
+}
+
+/* Callout / box editorial — canto único arredondado */
+.ma-callout {
+  background: var(--ma-cream);
+  border-radius: var(--ma-radius-lg) 0 0 0;
+  padding: var(--ma-space-4);
+}
+
+.ma-callout--alt-corner {
+  border-radius: 0 0 var(--ma-radius-lg) 0;
+}
+
+/* Estados */
+.ma-state--success { background: var(--ma-lime); color: var(--ma-charcoal); }
+.ma-state--info { background: var(--ma-blue); color: var(--ma-white); }
+.ma-state--alert { background: var(--ma-orange); color: var(--ma-charcoal); }
+.ma-state--error { background: var(--ma-red); color: var(--ma-white); }
+
+/* Foco de teclado */
+.ma-focus:focus-visible {
+  outline: 3px solid var(--ma-orange);
+  outline-offset: 3px;
+}

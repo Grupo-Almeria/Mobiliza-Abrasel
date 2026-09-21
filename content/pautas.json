@@ -1,0 +1,40 @@
+{
+  "_instrucoes": "Os cinco eixos da Carta de Compromisso. O resumo é a frase que aparece no card fechado (máximo 160 caracteres). O detalhe é o texto completo que aparece quando o card abre e aceita markdown: **negrito** e parágrafos separados por linha em branco. O icone aceita: turismo, seguranca, mobilidade, ordenamento, investidor.",
+  "pautas": [
+    {
+      "numero": 1,
+      "titulo": "Fomento ao Turismo",
+      "resumo": "Divulgar Brasília à altura do que ela é — gastronomia, natureza, turismo cívico e arquitetura.",
+      "icone": "turismo",
+      "detalhe": "Criação de um **Fundo de Promoção Turística do Distrito Federal**, com dotação própria e vinculada, destinado exclusivamente a campanhas nacionais e internacionais de divulgação da capital, sob a campanha-guarda-chuva “Visite Brasília”.\n\nAporte mínimo sugerido de R$ 20 milhões por ano, com indicadores de desempenho vinculados: chegadas de turistas, ocupação hoteleira, gasto médio do visitante e arrecadação de ISS e ICMS do setor.\n\nPromoção turística não é despesa — é um dos investimentos públicos de maior retorno comprovado."
+    },
+    {
+      "numero": 2,
+      "titulo": "Segurança Pública",
+      "resumo": "Preservar o trunfo de sermos uma cidade segura, com tecnologia, ordenamento e policiamento.",
+      "icone": "seguranca",
+      "detalhe": "**Três frentes.**\n\n**(a)** Expansão do programa DF 360 — reconhecimento facial, leitura de placas e integração de câmeras — para cobrir integralmente o Plano Piloto e os polos comerciais e turísticos, com integração das câmeras privadas dos estabelecimentos à central de monitoramento e melhoria da iluminação pública.\n\n**(b)** Iniciativas público-privadas que coíbam o comércio ilegal e a importunação nas imediações dos estabelecimentos e, na mesma medida, acolham a população em situação de rua com dignidade e assistência social.\n\n**(c)** Reforço do policiamento ostensivo e de proximidade nos polos gastronômicos, comerciais e turísticos, nos horários de maior movimento."
+    },
+    {
+      "numero": 3,
+      "titulo": "Mobilidade Urbana e Transporte",
+      "resumo": "Sem transporte à noite, não há economia da noite — nem emprego para quem a sustenta.",
+      "icone": "mobilidade",
+      "detalhe": "**Duas frentes.**\n\n**(a)** Criação e ampliação de linhas noturnas e de madrugada nas regiões comerciais hoje desassistidas, como a orla do Lago e o Noroeste — dando segurança ao trabalhador do turno da noite e viabilizando o funcionamento do comércio nos horários que mais geram receita.\n\n**(b)** Integração tarifária plena no DF e equiparação da tarifa do Entorno, com o GDF cobrindo a diferença junto aos operadores de Goiás. Cerca de 200 mil moradores do Entorno se deslocam diariamente ao DF para trabalhar, dos quais 144 mil dependem de transporte público."
+    },
+    {
+      "numero": 4,
+      "titulo": "Ordenamento do Espaço Público",
+      "resumo": "Concorrência leal, segurança sanitária e espaço comercial que a lei já autoriza e a inércia trava.",
+      "icone": "ordenamento",
+      "detalhe": "**Duas frentes.**\n\n**(a)** Exigência do RLE (Registro de Licenciamento de Empreendimento) como condição para a operação de qualquer restaurante — físico ou digital —, incluindo a atuação nas plataformas de delivery. Nenhum estabelecimento deve vender ao público, por qualquer canal, sem licenciamento sanitário válido.\n\n**(b)** Efetivação da Lei dos Puxadinhos, com força-tarefa do GDF para destravar e regularizar os espaços comerciais já previstos em lei, hoje inviabilizados por falta de execução de obras do poder público e das concessionárias."
+    },
+    {
+      "numero": 5,
+      "titulo": "Fomento ao Investidor",
+      "resumo": "Crédito mais barato para quem investe e ativos públicos ociosos transformados em polos de investimento.",
+      "icone": "investidor",
+      "detalhe": "**Duas frentes.**\n\n**(a)** Criação de um fundo garantidor para investimentos no Distrito Federal, com aportes do Governo e gestão do BRB, para ampliar o acesso e reduzir o custo do crédito. No Brasil, os pequenos negócios acessam apenas cerca de 20% do total de crédito concedido a empresas.\n\n**(b)** Concessão ou venda de ativos públicos subutilizados à iniciativa privada — Torre de TV, Parque da Cidade, Parque Água Mineral, Parque de Águas Claras, Parque Asa Delta, Autódromo e Torre Digital —, com os recursos de outorga destinados a capitalizar o Fundo de Promoção Turística do Eixo 1.\n\nO patrimônio ocioso da cidade financiando a promoção que atrai mais visitantes."
+    }
+  ]
+}

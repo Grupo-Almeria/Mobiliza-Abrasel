@@ -1,0 +1,46 @@
+{
+  "name": "Mobiliza Abrasel",
+  "version": 1,
+  "color": {
+    "brand-green": { "value": "#00652E", "usage": "Marca, navegação, botões primários e áreas institucionais. Branco sobre esta cor: contraste 7.24:1." },
+    "accent-orange": { "value": "#F58220", "usage": "Chamadas, destaques e movimento. Nunca texto branco sobre laranja (2.59:1); usar carvão (6.28:1)." },
+    "accent-lime": { "value": "#8DC63F", "usage": "Sucesso, conexão e mobilização. Sempre texto carvão (7.98:1), nunca branco (2.04:1)." },
+    "charcoal": { "value": "#231F20", "usage": "Texto principal e versões monocromáticas. Branco sobre carvão: 16.30:1." },
+    "cream": { "value": "#F7F4EE", "usage": "Fundo editorial alternativo." },
+    "info-blue": { "value": "#25408F", "usage": "Informação/dados quando necessário. Branco sobre azul: 9.51:1." },
+    "danger-red": { "value": "#B11116", "usage": "Erro/alerta; evitar como cor promocional principal." },
+    "white": { "value": "#FFFFFF", "usage": "Fundo padrão." },
+    "border": { "value": "rgba(35,31,32,0.10)", "usage": "Borda de 1px em cards sobre fundo branco." }
+  },
+  "type": {
+    "family": {
+      "sans": "Poppins, Inter, Arial, system-ui, sans-serif"
+    },
+    "weights": [400, 500, 600, 700],
+    "styles": {
+      "h1": { "weight": 700, "size": "clamp(2.25rem, 5vw, 4.75rem)", "lineHeight": 0.98, "usage": "Título hero." },
+      "h2": { "weight": 700, "size": "clamp(1.75rem, 3vw, 3rem)", "lineHeight": 1.08, "usage": "Título de seção." },
+      "h3": { "weight": 600, "size": "1.375rem-1.75rem", "lineHeight": 1.25, "usage": "Subtítulo de bloco/card." },
+      "body": { "weight": 400, "size": "1rem-1.125rem", "lineHeight": 1.55, "usage": "Texto corrido." },
+      "eyebrow": { "weight": 600, "size": "0.8125rem", "letterSpacing": "0.08em", "transform": "uppercase", "usage": "Rótulo acima de título." }
+    }
+  },
+  "spacing": {
+    "space-1": "8px", "space-2": "16px", "space-3": "24px", "space-4": "32px",
+    "space-5": "48px", "space-6": "64px", "space-7": "96px"
+  },
+  "radius": {
+    "radius-btn": "14px", "radius-sm": "12px", "radius-md": "20px", "radius-lg": "32px"
+  },
+  "shadow": {
+    "shadow-card": "0 14px 40px rgba(35,31,32,0.10)"
+  },
+  "contrast": {
+    "white-on-green": 7.24,
+    "white-on-charcoal": 16.30,
+    "charcoal-on-orange": 6.28,
+    "charcoal-on-lime": 7.98,
+    "white-on-blue": 9.51,
+    "avoid": ["white-on-orange (2.59:1)", "white-on-lime (2.04:1)"]
+  }
+}

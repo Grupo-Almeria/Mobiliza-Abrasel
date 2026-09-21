@@ -1,0 +1,21 @@
+{
+  "_instrucoes": "Textos e parâmetros do site, editáveis sem mexer em código. Os números do setor (associados e empregos) estão como null porque ainda não foram confirmados pela Abrasel-DF — enquanto forem null, o bloco de números simplesmente não aparece no site. Assim que forem confirmados, troque null pelo número inteiro, sem aspas e sem ponto: 1100, não \"1.100\". Deixe urlVideo como \"\" enquanto o vídeo institucional não estiver no ar; o espaço dele fica reservado na página. O texto do rodapé é provisório e precisa ser substituído pela versão aprovada pelo advogado eleitoral.",
+  "urlSite": "https://www.mobilizaabrasel.com.br",
+  "fraseHero": "O setor que alimenta Brasília decidiu escolher quem decide por Brasília.",
+  "linhaApoio": "Conheça os candidatos que assinaram a Carta de Compromisso da Abrasel-DF.",
+  "sobre": [
+    "O Mobiliza Abrasel é um movimento criado pela Abrasel-DF para reunir, em um só lugar, os candidatos que assumiram compromisso público com as pautas do setor de bares e restaurantes do Distrito Federal.",
+    "Ele nasceu de uma constatação simples: o setor conversa com o poder público o ano inteiro, mas raramente chega à eleição com uma pauta organizada e verificável. A Carta de Compromisso mudou isso. Ela coloca no papel o que o setor precisa, e quem assina passa a ser apresentado aqui.",
+    "A Abrasel-DF representa bares, restaurantes e empresas de alimentação fora do lar em todo o Distrito Federal. Um setor que emprega, que forma gente e que mantém a cidade funcionando da manhã à madrugada — com interesse direto em turismo, segurança, transporte e ordenamento urbano."
+  ],
+  "associados": null,
+  "empregos": null,
+  "frasePosicionamento": "Um setor que sustenta a economia da cidade e o emprego de quem vive dela.",
+  "urlVideo": "",
+  "textoCompartilhamento": "O setor de bares e restaurantes do DF organizou suas pautas em uma Carta de Compromisso. Conheça os candidatos que assinaram: [link]",
+  "aberturaMural": "Ouvimos cada candidato antes de qualquer compromisso.",
+  "dataPleito": "2026-10-04",
+  "ogTitle": "Mobiliza Abrasel — os candidatos que assinaram a Carta",
+  "ogDescription": "O setor de bares e restaurantes do Distrito Federal organizou suas pautas em uma Carta de Compromisso. Conheça quem assinou.",
+  "avisoRodape": "TEXTO PROVISÓRIO, sujeito a ajuste após parecer do advogado eleitoral. Site mantido pela Associação Brasileira de Bares e Restaurantes — Seccional Distrito Federal (Abrasel-DF). O Mobiliza Abrasel é um movimento de natureza associativa e não possui vínculo com partido político ou com a campanha eleitoral de qualquer candidato. A apresentação dos candidatos nesta página decorre exclusivamente da adesão voluntária de cada um à Carta de Compromisso do setor de bares e restaurantes do Distrito Federal, e não constitui declaração de apoio da entidade. A ordem de exibição é aleatória e muda a cada acesso."
+}
