@@ -1,0 +1,125 @@
+{
+  "_instrucoes": "Para adicionar um candidato, copie um bloco inteiro entre chaves, cole depois do último e edite os campos. Não esqueça a vírgula entre um bloco e outro. O campo cargo aceita: governador, senador, federal, distrital. O número precisa ter a quantidade certa de dígitos: 2 para governador, 3 para senador, 4 para deputado federal, 5 para deputado distrital. Para tirar alguém do ar sem apagar, mude ativo para false. A foto precisa estar em public/candidatos com exatamente o nome escrito aqui. ATENÇÃO: os dados abaixo são fictícios, para teste de layout. Substitua por dados reais conferidos no DivulgaCandContas do TSE antes de publicar.",
+  "candidatos": [
+    {
+      "cargo": "governador",
+      "nomeUrna": "Candidato Exemplo Um",
+      "nomeCompleto": "Candidato Exemplo Um da Silva",
+      "numero": "11",
+      "partido": "XX",
+      "foto": "/candidatos/governador-candidato-exemplo-um.jpg",
+      "instagram": "https://instagram.com/exemplo01",
+      "ativo": true
+    },
+    {
+      "cargo": "senador",
+      "nomeUrna": "Candidata Exemplo Dois",
+      "nomeCompleto": "Candidata Exemplo Dois de Oliveira",
+      "numero": "111",
+      "partido": "YY",
+      "foto": "/candidatos/senador-candidata-exemplo-dois.jpg",
+      "instagram": "https://instagram.com/exemplo02",
+      "ativo": true
+    },
+    {
+      "cargo": "senador",
+      "nomeUrna": "Candidato Exemplo Três",
+      "nomeCompleto": "Candidato Exemplo Três Pereira",
+      "numero": "222",
+      "partido": "ZZ",
+      "foto": "/candidatos/senador-candidato-exemplo-tres.jpg",
+      "instagram": "https://instagram.com/exemplo03",
+      "ativo": true
+    },
+    {
+      "cargo": "federal",
+      "nomeUrna": "Candidato Exemplo Quatro",
+      "nomeCompleto": "Candidato Exemplo Quatro Rodrigues",
+      "numero": "1111",
+      "partido": "XX",
+      "foto": "/candidatos/federal-candidato-exemplo-quatro.jpg",
+      "instagram": "https://instagram.com/exemplo04",
+      "ativo": true
+    },
+    {
+      "cargo": "federal",
+      "nomeUrna": "Candidata Exemplo Cinco",
+      "nomeCompleto": "Candidata Exemplo Cinco Nascimento",
+      "numero": "2222",
+      "partido": "YY",
+      "foto": "/candidatos/federal-candidata-exemplo-cinco.jpg",
+      "instagram": "https://instagram.com/exemplo05",
+      "ativo": true
+    },
+    {
+      "cargo": "federal",
+      "nomeUrna": "Candidato Exemplo Seis",
+      "nomeCompleto": "Candidato Exemplo Seis Barbosa",
+      "numero": "3333",
+      "partido": "ZZ",
+      "foto": "/candidatos/federal-candidato-exemplo-seis.jpg",
+      "instagram": "https://instagram.com/exemplo06",
+      "ativo": true
+    },
+    {
+      "cargo": "federal",
+      "nomeUrna": "Candidata Exemplo de Nome Longo",
+      "nomeCompleto": "Candidata Exemplo de Nome Bastante Longo Albuquerque",
+      "numero": "4444",
+      "partido": "WW",
+      "foto": "/candidatos/federal-candidata-exemplo-de-nome-longo.jpg",
+      "instagram": "https://instagram.com/exemplo07",
+      "ativo": true
+    },
+    {
+      "cargo": "distrital",
+      "nomeUrna": "Candidato Exemplo Oito",
+      "nomeCompleto": "Candidato Exemplo Oito Carvalho",
+      "numero": "11111",
+      "partido": "XX",
+      "foto": "/candidatos/distrital-candidato-exemplo-oito.jpg",
+      "instagram": "https://instagram.com/exemplo08",
+      "ativo": true
+    },
+    {
+      "cargo": "distrital",
+      "nomeUrna": "Candidata Exemplo Nove",
+      "nomeCompleto": "Candidata Exemplo Nove Fernandes",
+      "numero": "22222",
+      "partido": "YY",
+      "foto": "/candidatos/distrital-candidata-exemplo-nove.jpg",
+      "instagram": "https://instagram.com/exemplo09",
+      "ativo": true
+    },
+    {
+      "cargo": "distrital",
+      "nomeUrna": "Candidato Exemplo Dez",
+      "nomeCompleto": "Candidato Exemplo Dez Monteiro",
+      "numero": "33333",
+      "partido": "ZZ",
+      "foto": "/candidatos/distrital-candidato-exemplo-dez.jpg",
+      "instagram": "https://instagram.com/exemplo10",
+      "ativo": true
+    },
+    {
+      "cargo": "distrital",
+      "nomeUrna": "Candidata Exemplo Onze",
+      "nomeCompleto": "Candidata Exemplo Onze Siqueira",
+      "numero": "44444",
+      "partido": "WW",
+      "foto": "/candidatos/distrital-candidata-exemplo-onze.jpg",
+      "instagram": "https://instagram.com/exemplo11",
+      "ativo": true
+    },
+    {
+      "cargo": "distrital",
+      "nomeUrna": "Candidato Exemplo Doze",
+      "nomeCompleto": "Candidato Exemplo Doze Teixeira",
+      "numero": "55555",
+      "partido": "XX",
+      "foto": "/candidatos/distrital-candidato-exemplo-doze.jpg",
+      "instagram": "https://instagram.com/exemplo12",
+      "ativo": true
+    }
+  ]
+}

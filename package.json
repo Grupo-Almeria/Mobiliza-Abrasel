@@ -1,0 +1,33 @@
+{
+  "name": "mobiliza-abrasel",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "prebuild": "tsx scripts/validar-conteudo.ts",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "validar": "tsx scripts/validar-conteudo.ts",
+    "placeholders": "tsx scripts/gerar-placeholders.ts",
+    "og": "tsx scripts/gerar-og-image.ts"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1",
+    "next": "^15.1.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
