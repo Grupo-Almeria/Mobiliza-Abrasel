@@ -7,3 +7,6 @@ out
 *.log
 .DS_Store
 next-env.d.ts
+
+# cache do TypeScript
+tsconfig.tsbuildinfo

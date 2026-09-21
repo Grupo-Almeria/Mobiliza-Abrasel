@@ -1,3 +1,11 @@
+/*
+ * O CSS oficial da marca entra aqui, e não como import separado no layout.tsx.
+ * Assim o postcss-import o inlina antes do Tailwind rodar, e o
+ * `@layer components` de dentro dele é processado — o que posiciona as classes
+ * .ma-* entre o reset e os utilitários. Ver o cabeçalho do próprio arquivo.
+ */
+@import '../styles/tokens-marca.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

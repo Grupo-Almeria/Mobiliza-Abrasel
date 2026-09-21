@@ -40,7 +40,7 @@ export function Fechamento({ textoCompartilhamento, url, dataPleito }: Props) {
             texto={textoCompartilhamento}
             url={url}
             origem="fechamento"
-            variante="contorno"
+            variante="claro"
           />
         </div>
 

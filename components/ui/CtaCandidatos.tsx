@@ -16,7 +16,7 @@ import { Botao } from '@/components/ui/Botao'
 
 type Props = {
   origem: string
-  variante?: 'primario' | 'destaque' | 'contorno'
+  variante?: 'primario' | 'destaque' | 'claro'
   rotulo?: string
   className?: string
 }

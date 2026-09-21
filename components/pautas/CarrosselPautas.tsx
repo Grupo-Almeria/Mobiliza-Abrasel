@@ -101,7 +101,7 @@ export function CarrosselPautas({ pautas }: Props) {
               onClick={() => irPara(indice)}
               // 44×44 de área de toque, ainda que o ponto visível seja pequeno:
               // o alvo precisa caber no polegar, não no olho.
-              className="ma-focus flex h-11 w-11 items-center justify-center !min-h-[44px]"
+              className="ma-focus flex h-11 w-11 items-center justify-center"
             >
               <span
                 className={`block h-2 rounded-full transition-all ${

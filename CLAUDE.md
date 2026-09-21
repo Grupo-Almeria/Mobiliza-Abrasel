@@ -134,19 +134,60 @@ em corpo grande. Foi decisão consciente, não esquecimento.
 O "setor de bares e restaurantes" entra pela **fotografia real** do hero e do
 mural, que é o que os dois documentos pedem.
 
-### Conflito de cascata entre Tailwind e tokens.css
+### Cascata: o CSS da marca vive em `@layer components`
 
-`styles/tokens-marca.css` é importado **depois** do `globals.css`, para que as
-classes `.ma-*` vençam o preflight do Tailwind. O efeito colateral é que, nos
-poucos pontos em que um utilitário do Tailwind precisa vencer uma regra `.ma-*`,
-é necessário o modificador `!`:
+`styles/tokens-marca.css` é inlinado dentro de `app/globals.css` pelo
+`postcss-import` e envolvido em `@layer components`. Isso coloca as classes
+`.ma-*` **entre** o reset do Tailwind e os utilitários — que é exatamente onde
+elas devem estar:
 
-- `.ma-btn` define `border: 0` → o botão de contorno usa `!border-2`.
-- `.ma-eyebrow` define `display: inline-block` → o rótulo "Ler o detalhe" usa
-  `!inline-flex` para a seta não quebrar linha.
+- vencem o preflight, como a marca precisa;
+- perdem para `mt-4`, `p-0`, `text-sm` e afins, como o layout precisa.
 
-São os únicos dois casos. Se aparecer um terceiro, considere mover o import para
-dentro de `@layer components`.
+**Não desfaça isso.** Na Fase 1 o arquivo era importado depois de tudo, e as
+classes da marca anulavam os utilitários em silêncio — 92 elementos da página
+tinham algum utilitário engolido. Três defeitos chegaram ao cliente por causa
+disso: margens zeradas, botão sem borda e card com a largura errada.
+
+As regras da marca que mordem, e por quê:
+
+| Regra | O que ela engole se estiver fora da camada |
+|---|---|
+| `.ma-h1/h2/h3/body/eyebrow { margin: 0 }` | todo `mt-*` e `mb-*` |
+| `.ma-btn { padding: 0 22px }` | `px-*`, `p-*` |
+| `.ma-btn { font: 600 1rem/1 }` | `text-*` **e** `leading-*` (é shorthand) |
+| `.ma-btn { border: 0 }` | a borda inteira, mesmo com `!important` — `border-style: none` força a largura a computar 0 |
+| `.ma-card { padding: 32px }` | `p-0` |
+
+Se precisar de um componente novo com essas classes, saiba que `font` e `border`
+são shorthands: eles redefinem propriedades que você talvez não esperasse.
+
+### Verificação visual automatizada
+
+`scripts/verificar-visual.mjs` roda a página num Chromium e checa o que build e
+typecheck não pegam:
+
+```bash
+npx next build && npx next start -p 3100 &
+node scripts/verificar-visual.mjs
+```
+
+Ele reprova se encontrar rolagem horizontal, elemento estourando a coluna, alvo
+de toque abaixo de 44px, erro de JavaScript, ícone colapsado por falta de
+`shrink-0`, ou **utilitário anulado pelo CSS da marca**.
+
+Antes de mexer em CSS que afete a identidade, grave uma linha de base e compare
+depois:
+
+```bash
+node scripts/verificar-visual.mjs --salvar antes
+# ... faça a mudança, reconstrua ...
+node scripts/verificar-visual.mjs --comparar antes
+```
+
+A comparação mede cor, raio, sombra, peso e tamanho de fonte das classes `.ma-*`
+puras, em elementos de prova injetados e sem utilitário nenhum por cima. Se algo
+mudar, a alteração vazou para a identidade e precisa ser revista.
 
 ---
 
@@ -269,6 +310,11 @@ npm run validar        # roda a trava de validação isoladamente
 npm run build          # valida e constrói (a validação é prebuild)
 npm run placeholders   # gera imagens provisórias que ainda faltam
 npm run og             # regera public/og-image.jpg (1200×630, < 300 KB)
+
+# verificação visual (exige o site rodando em localhost:3100)
+node scripts/verificar-visual.mjs
+node scripts/verificar-visual.mjs --salvar antes
+node scripts/verificar-visual.mjs --comparar antes
 ```
 
 `npm run placeholders` nunca sobrescreve foto existente: ele só preenche o que

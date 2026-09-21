@@ -3,10 +3,9 @@ import { Analytics } from '@vercel/analytics/next'
 
 import { lerConfig } from '@/lib/conteudo'
 
+// O CSS da marca entra por dentro do globals.css, via postcss-import, para ficar
+// na camada `components` do Tailwind. Ver o cabeçalho de styles/tokens-marca.css.
 import './globals.css'
-// Depois do globals para que as classes .ma-* da marca vençam o preflight do
-// Tailwind. O arquivo é o tokens.css oficial, sem o @import do Google Fonts.
-import '../styles/tokens-marca.css'
 
 const config = lerConfig()
 
