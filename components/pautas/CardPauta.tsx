@@ -41,14 +41,14 @@ export function CardPauta({ pauta, className = '' }: Props) {
           limite INFERIOR da própria faixa — continua dentro do que a marca
           define, sem inventar tamanho novo.
         */}
-        <h3 className="ma-h3 mt-ma-1 text-balance text-ma-charcoal xl:!text-[1.375rem]">
+        <h3 className="ma-h3 mt-ma-1 text-balance text-ma-charcoal xl:text-[1.375rem]">
           <span className="sr-only">Eixo {pauta.numero}: </span>
           {pauta.titulo}
         </h3>
 
         <p className="ma-body text-ma-charcoal/75">{pauta.resumo}</p>
 
-        <span className="ma-eyebrow mt-auto !inline-flex items-center gap-1 pt-ma-2 text-ma-green">
+        <span className="ma-eyebrow mt-auto inline-flex items-center gap-1 pt-ma-2 text-ma-green">
           <span className="group-open:hidden">Ler o detalhe</span>
           <span className="hidden group-open:inline">Fechar</span>
           <svg

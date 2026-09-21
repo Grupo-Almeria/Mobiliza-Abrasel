@@ -62,7 +62,7 @@ export function CardCandidato({ candidato, url }: Props) {
                 cargo: candidato.cargo,
               })
             }
-            className="ma-focus ma-btn ma-btn--primary w-full !min-h-[44px] !px-3 text-center text-sm leading-tight"
+            className="ma-focus ma-btn ma-btn--primary w-full px-4 text-center text-sm leading-tight"
           >
             Ver no Instagram
             <span className="sr-only"> de {candidato.nomeUrna}, abre em nova aba</span>

@@ -26,7 +26,7 @@ type Props = {
   url: string
   origem: OrigemDeCompartilhamento
   rotulo?: string
-  variante?: 'primario' | 'destaque' | 'contorno'
+  variante?: 'primario' | 'destaque' | 'claro'
   className?: string
   /** Versão compacta, usada dentro do card de candidato. */
   compacto?: boolean
@@ -37,7 +37,7 @@ export function BotaoCompartilhar({
   url,
   origem,
   rotulo = 'Compartilhar',
-  variante = 'contorno',
+  variante = 'claro',
   className = '',
   compacto = false,
 }: Props) {
@@ -113,16 +113,21 @@ export function BotaoCompartilhar({
   ]
 
   return (
-    <div ref={containerRef} className={`relative ${className}`.trim()}>
+    // No modo compacto o wrapper precisa de largura total: sem isso ele encolhe
+    // ao conteúdo e o botão dentro, mesmo com w-full, fica menor que o card.
+    <div
+      ref={containerRef}
+      className={`relative ${compacto ? 'w-full' : ''} ${className}`.trim()}
+    >
       <Botao
         variante={variante}
         onClick={aoCompartilhar}
         aria-haspopup="menu"
         aria-expanded={menuAberto}
-        className={compacto ? 'w-full !min-h-[44px] px-4 text-sm' : ''}
+        className={compacto ? 'w-full px-4 text-sm leading-tight' : ''}
       >
         <IconeCompartilhar />
-        <span className="ml-2">{rotulo}</span>
+        <span className={compacto ? 'ml-1.5' : 'ml-2'}>{rotulo}</span>
       </Botao>
 
       {menuAberto && (
@@ -180,6 +185,7 @@ function IconeCompartilhar() {
       strokeLinejoin="round"
       aria-hidden="true"
       focusable="false"
+      className="shrink-0"
     >
       <circle cx="18" cy="5" r="3" />
       <circle cx="6" cy="12" r="3" />

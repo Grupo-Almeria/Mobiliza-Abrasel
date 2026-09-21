@@ -4,27 +4,24 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'reac
  * Botões do site.
  *
  * As duas primeiras variantes são as do design system, aplicadas pelas classes
- * `.ma-btn` de tokens.css. A terceira, `contorno`, é uma composição de neutros
- * sobre fundo verde (branco sobre verde = 7.24:1, par autorizado) para o CTA
- * secundário do hero, onde um botão verde desapareceria no fundo. Não inventa
- * cor nem token: usa só branco e transparência.
+ * `.ma-btn` de tokens.css. A terceira, `claro`, é o inverso exato do botão
+ * primário — branco com texto verde — para uso sobre fundo verde ou carvão,
+ * onde um botão verde desapareceria. Usa o mesmo par de cores da marca, só
+ * trocado de lado, e dá o mesmo contraste de 7.24:1.
  *
  * Regra de contraste que nunca pode ser quebrada: o botão laranja leva texto
  * carvão, nunca branco (branco sobre laranja é 2.59:1, reprovado).
  */
 
-type Variante = 'primario' | 'destaque' | 'contorno'
+type Variante = 'primario' | 'destaque' | 'claro'
 
 const CLASSES: Record<Variante, string> = {
   // Verde com branco — 7.24:1.
   primario: 'ma-btn ma-btn--primary',
   // Laranja com carvão — 6.28:1. Jamais branco sobre laranja.
   destaque: 'ma-btn ma-btn--accent',
-  // Branco sobre verde — 7.24:1. O `!` é necessário porque tokens-marca.css é
-  // carregado depois do Tailwind (para que .ma-* vença o preflight) e define
-  // `border: 0` em .ma-btn.
-  contorno:
-    'ma-btn !border-2 !border-ma-white/70 bg-transparent text-ma-white hover:bg-ma-white/10 transition-colors',
+  // Branco com verde — 7.24:1, o primário invertido.
+  claro: 'ma-btn bg-ma-white text-ma-green hover:bg-ma-cream transition-colors',
 }
 
 const BASE = 'ma-focus select-none text-center transition-transform active:scale-[0.98]'

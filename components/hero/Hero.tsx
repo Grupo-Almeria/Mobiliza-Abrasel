@@ -57,21 +57,26 @@ export function Hero({ frase, linhaApoio, textoCompartilhamento, url }: Props) {
       <div className="relative z-10 mx-auto w-full max-w-ma-container px-5 py-ma-6 md:px-8 md:py-ma-7 lg:px-12">
         <Logo variante="negativo" altura={56} prioridade className="h-12 w-auto md:h-16" />
 
-        <h1 className="ma-h1 mt-ma-4 max-w-[20ch] text-balance text-ma-white md:mt-ma-5">
+        {/*
+          pb-[0.06em] dá folga ao descendente: o token .ma-h1 usa line-height
+          0.98, menor que 1, então em Poppins o glifo é mais alto que a caixa de
+          linha. O padding resolve sem tocar no token da marca.
+        */}
+        <h1 className="ma-h1 mt-ma-4 max-w-[20ch] text-balance pb-[0.06em] text-ma-white md:mt-ma-5">
           {frase}
         </h1>
 
-        <p className="ma-body mt-ma-4 max-w-[46ch] text-ma-white/90 md:mt-ma-4 md:text-xl">
+        <p className="ma-body mt-ma-4 max-w-[46ch] text-ma-white/90 md:mt-ma-5 md:text-xl lg:mt-ma-6">
           {linhaApoio}
         </p>
 
-        <div className="mt-ma-4 flex flex-col gap-ma-2 sm:flex-row sm:items-center md:mt-ma-5">
+        <div className="mt-ma-5 flex flex-col gap-ma-2 sm:flex-row sm:items-center md:mt-ma-6">
           <CtaCandidatos origem="hero" variante="destaque" />
           <BotaoCompartilhar
             texto={textoCompartilhamento}
             url={url}
             origem="hero"
-            variante="contorno"
+            variante="claro"
           />
         </div>
       </div>

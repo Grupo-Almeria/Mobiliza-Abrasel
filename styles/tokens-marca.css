@@ -11,8 +11,22 @@
  * @font-face declarados em app/globals.css. É a mesma fonte, nos mesmos quatro
  * pesos — muda só a origem do arquivo.
  *
- * Nada mais foi alterado. Se a marca publicar uma versão nova deste arquivo,
- * substitua-o por inteiro e repita apenas a remoção do @import.
+ * DESVIO 2 — as regras de componente estão envolvidas em `@layer components`.
+ * Isso não muda valor nenhum: muda só a posição na cascata. Sem a camada, estas
+ * classes são carregadas depois dos utilitários do Tailwind e os anulam em
+ * silêncio — `.ma-h1 { margin: 0 }` zerava todo `mt-*`, `.ma-btn { border: 0 }`
+ * apagava a borda, `.ma-card { padding: 32px }` vencia o `p-0`. Isso produziu
+ * defeitos visíveis na Fase 1. Dentro de `components`, as classes continuam
+ * vencendo o reset do Tailwind, como a marca precisa, e passam a perder para
+ * utilitários pontuais, como o layout precisa.
+ *
+ * As custom properties em `:root` ficam FORA da camada de propósito: variáveis
+ * não participam da cascata por camada da mesma forma, e mantê-las fora garante
+ * que estejam disponíveis para tudo, inclusive para o tailwind.config.ts.
+ *
+ * Ao receber uma versão nova deste arquivo, substitua-o por inteiro e repita os
+ * dois desvios: remover o @import do Google Fonts e envolver as regras (tudo
+ * menos o bloco :root) em `@layer components { ... }`.
  */
 
 
@@ -50,106 +64,108 @@
   --ma-font-sans: Poppins, Inter, Arial, system-ui, sans-serif;
 }
 
-body {
-  margin: 0;
-  font-family: var(--ma-font-sans);
-  color: var(--ma-charcoal);
-  background: var(--ma-white);
-}
+@layer components {
+  body {
+    margin: 0;
+    font-family: var(--ma-font-sans);
+    color: var(--ma-charcoal);
+    background: var(--ma-white);
+  }
 
-.ma-container {
-  width: min(1280px, calc(100% - 40px));
-  margin-inline: auto;
-}
+  .ma-container {
+    width: min(1280px, calc(100% - 40px));
+    margin-inline: auto;
+  }
 
-/* Tipografia */
-.ma-h1 {
-  font: 700 clamp(2.25rem, 5vw, 4.75rem) / 0.98 var(--ma-font-sans);
-  margin: 0;
-}
+  /* Tipografia */
+  .ma-h1 {
+    font: 700 clamp(2.25rem, 5vw, 4.75rem) / 0.98 var(--ma-font-sans);
+    margin: 0;
+  }
 
-.ma-h2 {
-  font: 700 clamp(1.75rem, 3vw, 3rem) / 1.08 var(--ma-font-sans);
-  margin: 0;
-}
+  .ma-h2 {
+    font: 700 clamp(1.75rem, 3vw, 3rem) / 1.08 var(--ma-font-sans);
+    margin: 0;
+  }
 
-.ma-h3 {
-  font: 600 clamp(1.375rem, 2vw, 1.75rem) / 1.25 var(--ma-font-sans);
-  margin: 0;
-}
+  .ma-h3 {
+    font: 600 clamp(1.375rem, 2vw, 1.75rem) / 1.25 var(--ma-font-sans);
+    margin: 0;
+  }
 
-.ma-body {
-  font: 400 clamp(1rem, 1vw, 1.125rem) / 1.55 var(--ma-font-sans);
-  margin: 0;
-}
+  .ma-body {
+    font: 400 clamp(1rem, 1vw, 1.125rem) / 1.55 var(--ma-font-sans);
+    margin: 0;
+  }
 
-.ma-eyebrow {
-  display: inline-block;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  font: 600 0.8125rem / 1.2 var(--ma-font-sans);
-  color: var(--ma-green);
-  margin: 0;
-}
+  .ma-eyebrow {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font: 600 0.8125rem / 1.2 var(--ma-font-sans);
+    color: var(--ma-green);
+    margin: 0;
+  }
 
-/* Botões */
-.ma-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  padding: 0 22px;
-  border: 0;
-  border-radius: var(--ma-radius-btn);
-  font: 600 1rem/1 var(--ma-font-sans);
-  cursor: pointer;
-}
+  /* Botões */
+  .ma-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: var(--ma-radius-btn);
+    font: 600 1rem/1 var(--ma-font-sans);
+    cursor: pointer;
+  }
 
-.ma-btn--primary {
-  background: var(--ma-green);
-  color: var(--ma-white);
-}
+  .ma-btn--primary {
+    background: var(--ma-green);
+    color: var(--ma-white);
+  }
 
-.ma-btn--accent {
-  background: var(--ma-orange);
-  color: var(--ma-charcoal);
-}
+  .ma-btn--accent {
+    background: var(--ma-orange);
+    color: var(--ma-charcoal);
+  }
 
-/* Cards */
-.ma-card {
-  background: var(--ma-white);
-  border: 1px solid var(--ma-border);
-  border-radius: var(--ma-radius-md);
-  box-shadow: var(--ma-shadow-card);
-  padding: var(--ma-space-4);
-}
+  /* Cards */
+  .ma-card {
+    background: var(--ma-white);
+    border: 1px solid var(--ma-border);
+    border-radius: var(--ma-radius-md);
+    box-shadow: var(--ma-shadow-card);
+    padding: var(--ma-space-4);
+  }
 
-.ma-card--institutional {
-  background: var(--ma-green);
-  color: var(--ma-white);
-  border: 0;
-  box-shadow: none;
-}
+  .ma-card--institutional {
+    background: var(--ma-green);
+    color: var(--ma-white);
+    border: 0;
+    box-shadow: none;
+  }
 
-/* Callout / box editorial — canto único arredondado */
-.ma-callout {
-  background: var(--ma-cream);
-  border-radius: var(--ma-radius-lg) 0 0 0;
-  padding: var(--ma-space-4);
-}
+  /* Callout / box editorial — canto único arredondado */
+  .ma-callout {
+    background: var(--ma-cream);
+    border-radius: var(--ma-radius-lg) 0 0 0;
+    padding: var(--ma-space-4);
+  }
 
-.ma-callout--alt-corner {
-  border-radius: 0 0 var(--ma-radius-lg) 0;
-}
+  .ma-callout--alt-corner {
+    border-radius: 0 0 var(--ma-radius-lg) 0;
+  }
 
-/* Estados */
-.ma-state--success { background: var(--ma-lime); color: var(--ma-charcoal); }
-.ma-state--info { background: var(--ma-blue); color: var(--ma-white); }
-.ma-state--alert { background: var(--ma-orange); color: var(--ma-charcoal); }
-.ma-state--error { background: var(--ma-red); color: var(--ma-white); }
+  /* Estados */
+  .ma-state--success { background: var(--ma-lime); color: var(--ma-charcoal); }
+  .ma-state--info { background: var(--ma-blue); color: var(--ma-white); }
+  .ma-state--alert { background: var(--ma-orange); color: var(--ma-charcoal); }
+  .ma-state--error { background: var(--ma-red); color: var(--ma-white); }
 
-/* Foco de teclado */
-.ma-focus:focus-visible {
-  outline: 3px solid var(--ma-orange);
-  outline-offset: 3px;
+  /* Foco de teclado */
+  .ma-focus:focus-visible {
+    outline: 3px solid var(--ma-orange);
+    outline-offset: 3px;
+  }
 }
