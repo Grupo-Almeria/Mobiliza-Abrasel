@@ -1,7 +1,7 @@
 {
   "_instrucoes": "Textos e parâmetros do site, editáveis sem mexer em código. Os números do setor (associados e empregos) estão como null porque ainda não foram confirmados pela Abrasel-DF — enquanto forem null, o bloco de números simplesmente não aparece no site. Assim que forem confirmados, troque null pelo número inteiro, sem aspas e sem ponto: 1100, não \"1.100\". Deixe urlVideo como \"\" enquanto o vídeo institucional não estiver no ar; o espaço dele fica reservado na página. O texto do rodapé é provisório e precisa ser substituído pela versão aprovada pelo advogado eleitoral.",
   "urlSite": "https://www.mobilizaabrasel.com.br",
-  "fraseHero": "O setor que alimenta Brasília decidiu escolher quem decide por Brasília.",
+  "fraseHero": "O setor que alimenta Brasília quer um lugar na mesa onde a cidade se decide.",
   "linhaApoio": "Conheça os candidatos que assinaram a Carta de Compromisso da Abrasel-DF.",
   "sobre": [
     "O Mobiliza Abrasel é um movimento criado pela Abrasel-DF para reunir, em um só lugar, os candidatos que assumiram compromisso público com as pautas do setor de bares e restaurantes do Distrito Federal.",
