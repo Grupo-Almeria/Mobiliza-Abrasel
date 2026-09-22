@@ -1,5 +1,6 @@
 import { Candidatos } from '@/components/candidatos/Candidatos'
 import { Fechamento } from '@/components/fechamento/Fechamento'
+import { ForcaAbrasel } from '@/components/forca/ForcaAbrasel'
 import { Hero } from '@/components/hero/Hero'
 import { Mural } from '@/components/mural/Mural'
 import { Pautas } from '@/components/pautas/Pautas'
@@ -34,13 +35,9 @@ export default function Pagina() {
           url={config.urlSite}
         />
 
-        <Sobre
-          paragrafos={config.sobre}
-          associados={config.associados}
-          empregos={config.empregos}
-          frasePosicionamento={config.frasePosicionamento}
-          urlVideo={config.urlVideo}
-        />
+        <Sobre paragrafos={config.sobre} urlVideo={config.urlVideo} />
+
+        <ForcaAbrasel dados={config.forcaAbrasel} />
 
         <Pautas pautas={pautas} />
 

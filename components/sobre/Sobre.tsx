@@ -1,5 +1,4 @@
 import { Arcos } from '@/components/ui/Arcos'
-import { Contador } from '@/components/sobre/Contador'
 import { CtaCandidatos } from '@/components/ui/CtaCandidatos'
 import { Secao } from '@/components/ui/Secao'
 import { VideoFacade } from '@/components/sobre/VideoFacade'
@@ -9,28 +8,16 @@ import { VideoFacade } from '@/components/sobre/VideoFacade'
  *
  * Tom institucional, no máximo três parágrafos, sem jargão e sem tom de comício.
  *
- * Os números do setor só aparecem quando `associados` e `empregos` estiverem
- * preenchidos em config.json. Enquanto estiverem null, o bloco inteiro de
- * números some — nunca publicamos estimativa como se fosse dado confirmado.
+ * Os números do setor vivem na faixa "A Força da Abrasel-DF", logo abaixo deste
+ * bloco. Ficam só lá para não haver repetição: aqui é texto e vídeo.
  */
 
 type Props = {
   paragrafos: string[]
-  associados: number | null
-  empregos: number | null
-  frasePosicionamento: string
   urlVideo: string
 }
 
-export function Sobre({
-  paragrafos,
-  associados,
-  empregos,
-  frasePosicionamento,
-  urlVideo,
-}: Props) {
-  const temNumeros = associados !== null || empregos !== null
-
+export function Sobre({ paragrafos, urlVideo }: Props) {
   return (
     <Secao id="sobre" fundo="creme" rotulo="Sobre o Mobiliza">
       <Arcos
@@ -53,20 +40,6 @@ export function Sobre({
               </p>
             ))}
           </div>
-
-          {temNumeros && (
-            <div className="ma-callout mt-ma-5 bg-ma-white">
-              <div className="flex flex-wrap gap-ma-5">
-                {associados !== null && (
-                  <Contador valor={associados} rotulo="empresas associadas" />
-                )}
-                {empregos !== null && <Contador valor={empregos} rotulo="empregos gerados" />}
-              </div>
-              <p className="ma-body mt-ma-3 max-w-[40ch] text-ma-charcoal/75">
-                {frasePosicionamento}
-              </p>
-            </div>
-          )}
 
           <div className="mt-ma-5">
             <CtaCandidatos origem="sobre" variante="primario" />

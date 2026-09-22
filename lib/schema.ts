@@ -431,55 +431,76 @@ export type FotoMural = z.infer<typeof EsquemaFotoMural>
    CONFIG
    ────────────────────────────────────────────────────────────────────────── */
 
-/**
- * Número do setor que ainda não foi confirmado pela Abrasel-DF fica como null.
- * O bloco simplesmente não aparece no site. Nunca publicamos estimativa como
- * se fosse dado verificado — é regra do briefing (seção 11, item 1).
- */
-const numeroDoSetor = (campo: string) =>
-  // z.union engole as mensagens dos ramos e devolve "Invalid input", em inglês.
-  // Validamos à mão para que cada caso tenha explicação própria.
-  z.unknown().superRefine((valor, ctx) => {
-    const comoPreencher =
-      `Escreva o número inteiro sem aspas e sem ponto — 1100, não "1.100" nem "1100". ` +
-      `Enquanto a Abrasel-DF não confirmar o dado, deixe null: o bloco de números não aparece no site.`
+/* ── Faixa "A Força da Abrasel-DF" ──────────────────────────────────────── */
 
-    if (valor === null) return
+const EsquemaIndicador = z.object({
+  // O prefixo fica fora do valor porque o número é animado e o sinal não.
+  prefixo: z
+    .string({ invalid_type_error: erro('o "prefixo" precisa ser um texto entre aspas', 'Use "+" ou apague a linha.') })
+    .trim()
+    .max(3, erro('o "prefixo" é longo demais', 'É um sinal curto, como "+". '))
+    .optional(),
 
-    if (valor === undefined) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: erro(`o campo "${campo}" não existe`, comoPreencher),
-      })
-      return
-    }
+  valor: z
+    .number({
+      required_error: erro('o campo "valor" não existe', 'Adicione o número inteiro, sem aspas e sem ponto: 16000, não "16.000".'),
+      invalid_type_error: erro(
+        'o "valor" precisa ser um número sem aspas e sem ponto',
+        'Escreva 16000, não "16.000". O site formata o ponto de milhar sozinho.',
+      ),
+    })
+    .int(erro('o "valor" precisa ser um número inteiro', 'Sem casas decimais.'))
+    .positive(erro('o "valor" precisa ser maior que zero', 'Confira o número.')),
 
-    if (typeof valor !== 'number') {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: erro(
-          `"${String(valor)}" não é um número — está entre aspas ou tem ponto`,
-          comoPreencher,
-        ),
-      })
-      return
-    }
+  rotulo: textoObrigatorio('rotulo', 'É o texto pequeno abaixo do número.', 3).max(
+    60,
+    erro(
+      'o rótulo do indicador passou de 60 caracteres',
+      'Ele aparece em caixa alta, abaixo do número. Encurte para caber em duas linhas no celular.',
+    ),
+  ),
+})
 
-    if (!Number.isInteger(valor)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: erro(`${valor} não é um número inteiro`, comoPreencher),
-      })
-      return
-    }
+const EsquemaForcaAbrasel = z.object({
+  titulo: textoObrigatorio('titulo', 'É o título da faixa de números.', 5).max(
+    80,
+    erro('o título da faixa passou de 80 caracteres', 'Encurte.'),
+  ),
 
-    if (valor <= 0) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: erro(`${valor} não faz sentido como ${campo}`, 'O número precisa ser maior que zero.'),
-      })
-    }
-  }) as unknown as z.ZodType<number | null>
+  subtitulo: textoObrigatorio('subtitulo', 'É a linha abaixo do título da faixa.', 10).max(
+    160,
+    erro('o subtítulo da faixa passou de 160 caracteres', 'Encurte para caber em duas linhas.'),
+  ),
+
+  indicadores: z
+    .array(EsquemaIndicador, {
+      required_error: erro('a lista "indicadores" não existe', 'A faixa precisa da chave "indicadores".'),
+      invalid_type_error: erro('"indicadores" precisa ser uma lista entre colchetes', 'A estrutura é: "indicadores": [ ... ].'),
+    })
+    .length(
+      3,
+      erro(
+        'a faixa precisa de exatamente três indicadores',
+        'São três números lado a lado no computador. Com mais ou menos, o layout desequilibra.',
+      ),
+    ),
+
+  pilares: z
+    .array(
+      textoObrigatorio('pilar', 'Cada item é uma palavra.', 3).max(
+        24,
+        erro('um pilar passou de 24 caracteres', 'São palavras curtas, como "Emprego" ou "Segurança".'),
+      ),
+      {
+        required_error: erro('a lista "pilares" não existe', 'Adicione "pilares" com as palavras entre colchetes.'),
+        invalid_type_error: erro('"pilares" precisa ser uma lista entre colchetes', 'A estrutura é: "pilares": [ "Emprego", "Renda" ].'),
+      },
+    )
+    .min(2, erro('a lista "pilares" tem menos de dois itens', 'A linha de pilares precisa de pelo menos duas palavras.'))
+    .max(6, erro('a lista "pilares" tem mais de seis itens', 'Acima de seis, a linha quebra feio no celular.')),
+})
+
+export type ForcaAbrasel = z.infer<typeof EsquemaForcaAbrasel>
 
 const YOUTUBE_HOSTS = ['youtube.com', 'youtu.be', 'youtube-nocookie.com']
 
@@ -591,14 +612,7 @@ export const EsquemaConfig = z.object({
       }
     }),
 
-  associados: numeroDoSetor('associados'),
-  empregos: numeroDoSetor('empregos'),
-
-  frasePosicionamento: textoObrigatorio(
-    'frasePosicionamento',
-    'É a frase que acompanha os números do setor.',
-    10,
-  ).max(200, erro('a frase de posicionamento passou de 200 caracteres', 'Encurte.')),
+  forcaAbrasel: EsquemaForcaAbrasel,
 
   dataPleito: z
     .string({
