@@ -273,9 +273,26 @@ números não aparece no site.** Nunca publique estimativa como dado verificado.
 
 ### Vídeo institucional
 
-`urlVideo` está vazio. Enquanto estiver, o espaço fica reservado na página com um
-aviso. Cole o endereço do YouTube e o vídeo aparece com facade (miniatura +
-botão de play; o iframe só carrega no clique).
+O vídeo vive no YouTube, como **não listado**, e `config.json` guarda só o
+endereço. Nunca coloque o arquivo de vídeo no repositório: o GitHub rejeita
+arquivos acima de 100 MB, e servir vídeo estático elimina a qualidade adaptativa
+de que quem abre no 4G depende.
+
+O bloco usa *facade*: mostra a miniatura, e o iframe do YouTube — cerca de
+700 KB — só é criado quando alguém clica no play.
+
+**A orientação é detectada pela própria URL.** Um endereço `/shorts/` é sempre
+vertical, por definição da plataforma, e o bloco passa a 9:16 com largura máxima
+de 340px. Qualquer outro formato de endereço rende 16:9. Isso é deliberado: se o
+vídeo for trocado por um 16:9 comum, o bloco volta sozinho ao formato tradicional,
+sem interruptor que alguém precise lembrar de mexer. O `aspect-[9/16]` em
+`VideoFacade.tsx` não é arbitrário — vem daí.
+
+O vídeo atual é vertical, feito para redes. O briefing previa 16:9; o site foi
+adaptado ao material real, e não o contrário.
+
+Se `urlVideo` estiver vazio, o espaço fica reservado com um aviso, e o layout já
+está resolvido para quando o vídeo chegar.
 
 ### Se o build falhar
 
