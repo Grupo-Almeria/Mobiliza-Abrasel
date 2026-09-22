@@ -28,12 +28,18 @@ export const CARGOS = {
 
 export type Cargo = keyof typeof CARGOS
 
-/** Ordem de exibição do filtro. Não é ranking — é a ordem da cédula. */
+/**
+ * Ordem de exibição dos blocos e do filtro.
+ *
+ * Do cargo mais próximo ao mais amplo: distrital, federal, senador, governador.
+ * Não é ranking de importância — é onde o voto do setor tem mais peso relativo,
+ * e onde a lista é mais longa, aparecendo primeiro.
+ */
 export const ORDEM_CARGOS: readonly Cargo[] = [
-  'governador',
-  'senador',
-  'federal',
   'distrital',
+  'federal',
+  'senador',
+  'governador',
 ] as const
 
 export const CARGOS_VALIDOS = ORDEM_CARGOS as readonly string[]

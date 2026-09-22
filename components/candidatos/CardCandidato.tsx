@@ -47,7 +47,11 @@ export function CardCandidato({ candidato, url }: Props) {
           {candidato.nomeUrna}
         </h3>
 
-        <p className="ma-body mt-0.5 text-sm text-ma-charcoal/60">{candidato.partido}</p>
+        {/* A sigla é opcional: sem ela, a linha inteira some em vez de deixar
+            um vão vazio no card. */}
+        {candidato.partido && (
+          <p className="ma-body mt-0.5 text-sm text-ma-charcoal/60">{candidato.partido}</p>
+        )}
 
         <NumeroUrna numero={candidato.numero} className="mt-ma-2" />
 
