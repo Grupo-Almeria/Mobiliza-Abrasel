@@ -22,18 +22,32 @@ type Props = {
   titulo: string
 }
 
-/** Extrai o id do vídeo das formas usuais de endereço do YouTube. */
-function idDoVideo(url: string): string | null {
+/**
+ * Extrai o id do vídeo e a orientação, das formas usuais de endereço do YouTube.
+ *
+ * A orientação vem do próprio caminho: `/shorts/` é sempre vertical (9:16), por
+ * definição da plataforma. Derivar daí, em vez de criar um campo no config.json,
+ * significa que trocar o vídeo por um 16:9 comum devolve o bloco ao formato
+ * tradicional sozinho — ninguém precisa lembrar de mexer num interruptor.
+ */
+function dadosDoVideo(url: string): { id: string; vertical: boolean } | null {
   try {
     const endereco = new URL(url)
     const host = endereco.hostname.replace(/^www\./, '')
 
-    if (host === 'youtu.be') return endereco.pathname.slice(1) || null
-    if (endereco.searchParams.has('v')) return endereco.searchParams.get('v')
+    if (host === 'youtu.be') {
+      const id = endereco.pathname.slice(1)
+      return id ? { id, vertical: false } : null
+    }
 
-    // /embed/ID e /shorts/ID
+    if (endereco.searchParams.has('v')) {
+      const id = endereco.searchParams.get('v')
+      return id ? { id, vertical: false } : null
+    }
+
     const partes = endereco.pathname.split('/').filter(Boolean)
-    if (partes[0] === 'embed' || partes[0] === 'shorts') return partes[1] ?? null
+    if (partes[0] === 'embed' && partes[1]) return { id: partes[1], vertical: false }
+    if (partes[0] === 'shorts' && partes[1]) return { id: partes[1], vertical: true }
 
     return null
   } catch {
@@ -43,11 +57,21 @@ function idDoVideo(url: string): string | null {
 
 export function VideoFacade({ url, titulo }: Props) {
   const [tocando, setTocando] = useState(false)
-  const id = idDoVideo(url)
+  const dados = dadosDoVideo(url)
+  const vertical = dados?.vertical ?? false
 
-  if (!id) {
+  /**
+   * Um 9:16 ocupando a largura inteira da coluna ficaria mais alto que a tela no
+   * celular. A largura máxima mantém o vídeo em tamanho confortável e centrado,
+   * nas duas telas.
+   */
+  const proporcao = vertical
+    ? 'aspect-[9/16] mx-auto w-full max-w-[min(340px,100%)]'
+    : 'aspect-video'
+
+  if (!dados) {
     return (
-      <div className="ma-card flex aspect-video items-center justify-center bg-ma-cream text-center">
+      <div className={`ma-card flex items-center justify-center bg-ma-cream text-center ${proporcao}`}>
         <p className="ma-body max-w-[32ch] px-ma-3 text-ma-charcoal/60">
           O vídeo institucional entra aqui assim que estiver pronto.
         </p>
@@ -55,9 +79,11 @@ export function VideoFacade({ url, titulo }: Props) {
     )
   }
 
+  const { id } = dados
+
   if (tocando) {
     return (
-      <div className="aspect-video overflow-hidden rounded-ma-md shadow-ma-card">
+      <div className={`overflow-hidden rounded-ma-md shadow-ma-card ${proporcao}`}>
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`}
           title={titulo}
@@ -77,7 +103,7 @@ export function VideoFacade({ url, titulo }: Props) {
         setTocando(true)
       }}
       aria-label={`Assistir ao vídeo: ${titulo}`}
-      className="ma-focus group relative block aspect-video w-full overflow-hidden rounded-ma-md bg-ma-charcoal shadow-ma-card"
+      className={`ma-focus group relative block overflow-hidden rounded-ma-md bg-ma-charcoal shadow-ma-card ${proporcao}`}
     >
       {/*
         Miniatura servida pelo próprio YouTube. É a única requisição externa da
