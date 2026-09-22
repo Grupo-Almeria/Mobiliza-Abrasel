@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 
 import { lerConfig } from '@/lib/conteudo'
+import { CAMINHO_OG_IMAGE, OG_ALTURA, OG_LARGURA } from '@/lib/og'
 
 // O CSS da marca entra por dentro do globals.css, via postcss-import, para ficar
 // na camada `components` do Tailwind. Ver o cabeçalho de styles/tokens-marca.css.
@@ -23,9 +24,11 @@ export const metadata: Metadata = {
     description: config.ogDescription,
     images: [
       {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
+        url: CAMINHO_OG_IMAGE,
+        width: OG_LARGURA,
+        height: OG_ALTURA,
+        // Parte dos rastreadores lê o og:image:type antes de baixar a imagem.
+        type: 'image/jpeg',
         alt: 'Mobiliza Abrasel',
       },
     ],
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: config.ogTitle,
     description: config.ogDescription,
-    images: ['/og-image.jpg'],
+    images: [CAMINHO_OG_IMAGE],
   },
   robots: { index: true, follow: true },
 }
