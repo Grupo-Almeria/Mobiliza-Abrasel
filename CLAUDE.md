@@ -327,8 +327,24 @@ Regras que valem para qualquer texto novo:
 
 - **Nenhum pedido direto de voto.** Nada de "vote em", "eleja", "seu voto". A
   formulação é sempre *assinaram*, *se comprometeram com*, *conheça*.
-- Ordem aleatória, tratamento visual idêntico, sem ranking e sem destaque
-  individual. Todos os cards têm o mesmo tamanho e o mesmo peso.
+- **Ordem aleatória** dentro de cada cargo, tratamento visual idêntico, sem
+  ranking e sem destaque individual. Todos os cards têm o mesmo tamanho e o
+  mesmo peso.
+
+  O embaralhamento está em `lib/embaralhar.ts` e roda em duas camadas: no build,
+  com semente derivada do commit, e de novo no cliente depois da hidratação.
+  **A camada do build não é redundância.** Sem ela, quem abrir o site com
+  JavaScript bloqueado veria sempre a ordem de cadastro — o ranking implícito
+  que a regra existe para evitar. Se algum dia alguém simplificar isso para
+  randomizar só no cliente, a proteção cai justamente no caso mais frágil.
+
+  A ordem dos CARGOS é fixa e definida pelo cliente: distrital, federal,
+  senador, governador. Só a ordem dentro de cada um é sorteada.
+
+- **Fotos do mural:** algumas mostram material de campanha ao fundo (banners com
+  número de urna, adesivos, camisetas), o que contraria a regra de não reproduzir
+  material de campanha. Está com o cliente para decisão junto ao advogado
+  eleitoral. Para tirar qualquer uma do ar: `ativo: false` em `mural.json`.
 - Não reproduzir material de campanha: santinho, jingle, arte oficial, slogan.
 - Sem qualquer mecanismo de doação ou arrecadação.
 - Sem coleta de dado pessoal. Não há formulário em lugar nenhum, o que mantém a

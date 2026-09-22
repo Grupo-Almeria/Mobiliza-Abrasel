@@ -1,24 +1,20 @@
 {
-  "_instrucoes": "Fotos dos encontros com os candidatos. A legenda é opcional: se a foto não precisar de texto, apague a linha inteira da legenda. Para esconder uma foto sem apagar, mude ativo para false. A imagem precisa estar em public/mural com exatamente o nome escrito aqui. Horizontais: 2000x1500. Verticais: 1500x2000.",
+  "_instrucoes": "Fotos dos encontros com os candidatos. A legenda é opcional e está ausente de propósito: as fotos são reais e ainda não há texto confirmado para descrevê-las. Para acrescentar, escreva \"legenda\": \"texto aqui\", antes da linha do ativo, e não esqueça a vírgula. Para esconder uma foto sem apagar, mude ativo para false. A imagem precisa estar em public/mural com exatamente o nome escrito aqui. Proporção 4:3 (por exemplo 1600x1200).",
   "fotos": [
     {
       "imagem": "/mural/mural-01.jpg",
-      "legenda": "Encontro com candidatos ao Governo do Distrito Federal.",
       "ativo": true
     },
     {
       "imagem": "/mural/mural-02.jpg",
-      "legenda": "Almoço de apresentação das pautas do setor.",
       "ativo": true
     },
     {
       "imagem": "/mural/mural-03.jpg",
-      "legenda": "Reunião de trabalho na sede da Abrasel-DF.",
       "ativo": true
     },
     {
       "imagem": "/mural/mural-04.jpg",
-      "legenda": "Apresentação da Carta de Compromisso.",
       "ativo": true
     },
     {
@@ -27,37 +23,30 @@
     },
     {
       "imagem": "/mural/mural-06.jpg",
-      "legenda": "Debate sobre mobilidade urbana e economia noturna.",
       "ativo": true
     },
     {
       "imagem": "/mural/mural-07.jpg",
-      "legenda": "Associados reunidos para a construção das pautas.",
       "ativo": true
     },
     {
       "imagem": "/mural/mural-08.jpg",
-      "legenda": "Conversa sobre segurança nos polos gastronômicos.",
       "ativo": true
     },
     {
       "imagem": "/mural/mural-09.jpg",
-      "legenda": "Assinatura da Carta de Compromisso.",
       "ativo": true
     },
     {
       "imagem": "/mural/mural-10.jpg",
-      "legenda": "",
       "ativo": true
     },
     {
       "imagem": "/mural/mural-11.jpg",
-      "legenda": "Encontro com candidatos ao Senado.",
       "ativo": true
     },
     {
       "imagem": "/mural/mural-12.jpg",
-      "legenda": "Reunião sobre ordenamento do espaço público.",
       "ativo": true
     }
   ]

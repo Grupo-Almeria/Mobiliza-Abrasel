@@ -1,14 +1,20 @@
-import { CardCandidato } from '@/components/candidatos/CardCandidato'
+import { ListaCandidatos } from '@/components/candidatos/ListaCandidatos'
 import { ORDEM_CARGOS, CARGOS } from '@/lib/cargos'
 import { Secao } from '@/components/ui/Secao'
+import { embaralharNoBuild } from '@/lib/embaralhar'
 import type { Candidato } from '@/lib/conteudo'
 
 /**
  * Bloco 3 — Candidatos. O coração do site.
  *
- * Versão desta fase: lista completa, agrupada por cargo, com o card definitivo.
- * O filtro em pílulas, a sincronia com a URL (?cargo=distrital) e a ordenação
- * aleatória entram na próxima fase.
+ * A ordem dentro de cada cargo é aleatória, e isso é regra, não enfeite: a
+ * lista não pode ser lida como ranking de preferência da associação. O
+ * embaralhamento acontece no build, com semente do commit, e de novo no cliente
+ * a cada visita — ver lib/embaralhar.ts.
+ *
+ * A ordem dos CARGOS, ao contrário, é fixa e definida pelo cliente.
+ *
+ * O filtro em pílulas e a sincronia com a URL (?cargo=distrital) entram depois.
  */
 
 type Props = {
@@ -30,9 +36,13 @@ export function Candidatos({ candidatos, url }: Props) {
         </p>
       </div>
 
-      {ORDEM_CARGOS.map((cargo) => {
+      {ORDEM_CARGOS.map((cargo, indiceDoCargo) => {
         const doCargo = candidatos.filter((candidato) => candidato.cargo === cargo)
         if (doCargo.length === 0) return null
+
+        // O desvio faz cada cargo sortear diferente dentro do mesmo build; sem
+        // ele, listas de tamanho igual sairiam com a mesma permutação.
+        const embaralhados = embaralharNoBuild(doCargo, indiceDoCargo)
 
         return (
           <div key={cargo} className="mt-ma-6">
@@ -43,13 +53,7 @@ export function Candidatos({ candidatos, url }: Props) {
               </span>
             </h3>
 
-            <ul className="mt-ma-3 grid grid-cols-1 gap-ma-2 min-[380px]:grid-cols-2 md:grid-cols-3 md:gap-ma-3 lg:grid-cols-4 xl:grid-cols-5">
-              {doCargo.map((candidato) => (
-                <li key={`${candidato.cargo}-${candidato.numero}`} className="flex">
-                  <CardCandidato candidato={candidato} url={url} />
-                </li>
-              ))}
-            </ul>
+            <ListaCandidatos candidatos={embaralhados} url={url} />
           </div>
         )
       })}
