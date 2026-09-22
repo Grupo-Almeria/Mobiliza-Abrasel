@@ -313,6 +313,16 @@ adaptado ao material real, e não o contrário.
 Se `urlVideo` estiver vazio, o espaço fica reservado com um aviso, e o layout já
 está resolvido para quando o vídeo chegar.
 
+### Aviso institucional do rodapé
+
+`avisoRodape`, em `config.json`, é a versão **definitiva** do aviso — o carimbo
+de "texto provisório" foi removido pelo cliente. Ele declara quem mantém o site,
+a natureza associativa do movimento, a ausência de vínculo partidário, que a
+apresentação decorre da adesão à Carta e que a ordem de exibição é aleatória.
+
+Qualquer alteração nesse texto mexe na peça de conformidade eleitoral do site.
+Não reescreva sem passar pelo cliente.
+
 ### Se o build falhar
 
 A Vercel manda e-mail e mostra o erro no log do deploy. O site continua no ar com
