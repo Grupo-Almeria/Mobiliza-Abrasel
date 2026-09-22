@@ -103,11 +103,17 @@ const EsquemaCandidato = z
 
     nomeUrna: textoObrigatorio('nomeUrna', 'É o nome como aparece na urna eletrônica.', 2),
 
-    nomeCompleto: textoObrigatorio(
-      'nomeCompleto',
-      'É o nome civil completo, como consta no registro do TSE.',
-      2,
-    ),
+    // Não aparece no site — existe só como registro interno. Opcional para que
+    // a falta dele não impeça a publicação de um candidato.
+    nomeCompleto: z
+      .string({
+        invalid_type_error: erro(
+          'o campo "nomeCompleto" precisa ser um texto entre aspas',
+          'Escreva o nome civil entre aspas, ou apague a linha inteira.',
+        ),
+      })
+      .trim()
+      .optional(),
 
     numero: z
       .string({
@@ -130,14 +136,20 @@ const EsquemaCandidato = z
         ),
       ),
 
+    // Opcional: quando a sigla ainda não foi confirmada, a linha do partido
+    // simplesmente não aparece no card. Melhor um card sem sigla do que uma
+    // sigla errada num site eleitoral.
     partido: z
       .string({
-        required_error: erro('o campo "partido" não existe', 'Adicione a sigla do partido. Ex.: "XX".'),
-        invalid_type_error: erro('o campo "partido" precisa ser um texto', 'Use a sigla entre aspas.'),
+        invalid_type_error: erro(
+          'o campo "partido" precisa ser um texto entre aspas',
+          'Use a sigla oficial entre aspas. Ex.: "XX". Ou apague a linha inteira enquanto não souber.',
+        ),
       })
       .trim()
-      .min(2, erro('a sigla do partido é curta demais', 'Use a sigla oficial. Ex.: "XX".'))
-      .max(20, erro('a sigla do partido é longa demais', 'Use só a sigla, não o nome por extenso.')),
+      .min(2, erro('a sigla do partido é curta demais', 'Use a sigla oficial, com pelo menos duas letras.'))
+      .max(20, erro('a sigla do partido é longa demais', 'Use só a sigla, não o nome por extenso.'))
+      .optional(),
 
     foto: textoObrigatorio(
       'foto',
