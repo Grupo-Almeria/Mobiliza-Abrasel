@@ -323,6 +323,60 @@ apresentação decorre da adesão à Carta e que a ordem de exibição é aleat�
 Qualquer alteração nesse texto mexe na peça de conformidade eleitoral do site.
 Não reescreva sem passar pelo cliente.
 
+### Imagem da prévia do link (WhatsApp)
+
+O caminho da imagem mora em **`lib/og.ts`**, num lugar só, lido pelo
+`app/layout.tsx`, pelo gerador e pela trava.
+
+**O número no nome do arquivo é proposital.** O WhatsApp guarda a imagem da
+prévia pela URL, no aparelho de quem envia. Trocar só o conteúdo do arquivo não
+garante que ele busque de novo — trocar o nome garante. Ao redesenhar a arte,
+suba o número em `lib/og.ts` e rode `npm run og`.
+
+O texto desenhado dentro da imagem são `ogFrase` e `ogRodape`, em `config.json`.
+Não confunda com `ogTitle` e `ogDescription`, que são o texto **ao lado** da
+imagem no cartão. São coisas diferentes e não devem repetir uma à outra.
+**Depois de mexer em `ogFrase` ou `ogRodape`, rode `npm run og`** — senão a arte
+continua com o texto antigo.
+
+#### Por que o Chromium e não o `sharp`
+
+A primeira versão desenhava a arte em SVG e rasterizava com `sharp`. Funciona
+para formas, mas não para texto: o `sharp` desenha texto pela fonte instalada no
+sistema, via fontconfig, e a Poppins não está instalada em lugar nenhum. Cairia
+numa fonte de fallback diferente a cada máquina. Por isso a arte original ficou
+só com o logotipo, sem uma palavra.
+
+`scripts/gerar-og-image.ts` renderiza a peça como página no Chromium e fotografa.
+A Poppins entra embutida em base64, a partir dos mesmos `.woff2` que o site
+serve — nada depende do sistema operacional. Fonte e logotipo vão como data URI
+de propósito: a página é montada com `setContent` e o Chromium não busca arquivo
+nenhum, o que contorna a restrição de CORS que `file://` impõe a `@font-face`.
+
+**Isto não roda no build.** O script é manual e a imagem vai versionada no git;
+a Vercel nunca executa o Chromium.
+
+#### A trava confere a imagem
+
+`validar-conteudo.ts` checa que o arquivo existe, que está em 1200×630 e que
+está abaixo de 300 KB. Existe por causa de um defeito real: **prévia quebrada
+não aparece em lugar nenhum do site.** O build fica verde, a página abre certa, e
+o erro só se revela no primeiro compartilhamento no WhatsApp — o canal que este
+site existe para alimentar. Nenhuma outra checagem pega isso.
+
+#### Quando a prévia não aparece no WhatsApp
+
+Cartão mostrando o domínio cru como título, sem imagem, significa que o WhatsApp
+**não leu nada** da página — não que a imagem esteja ruim. Se tivesse lido,
+mostraria o `ogTitle`. Quase sempre é cache de uma tentativa feita antes de o
+domínio responder. Na ordem:
+
+1. abrir a URL da imagem direto no navegador — se ela não carregar, o problema é
+   a publicação, não a marcação;
+2. rodar `developers.facebook.com/tools/debug/` e clicar em **Scrape Again**;
+3. testar numa conversa consigo mesmo, esperando a prévia carregar **antes** de
+   enviar.
+
 ### Se o build falhar
 
 A Vercel manda e-mail e mostra o erro no log do deploy. O site continua no ar com
@@ -360,7 +414,11 @@ Regras que valem para qualquer texto novo:
 - Sem coleta de dado pessoal. Não há formulário em lugar nenhum, o que mantém a
   superfície de LGPD em zero e dispensa banner de cookies.
 - O aviso do rodapé vive em `config.json` para ser ajustado rápido após o parecer
-  jurídico. **O texto atual está marcado como provisório.**
+  jurídico. O texto atual é a versão definitiva entregue pelo cliente.
+- **A imagem da prévia do link traz "Eleições 2026 · Distrito Federal"** — escolha
+  do cliente, registrada. É informação factual, mas é conteúdo eleitoral numa peça
+  feita para circular em massa, e está pendente de parecer. Para tirar: apague
+  `ogRodape` de `config.json` e rode `npm run og`; nenhum código muda.
 
 ---
 
@@ -371,7 +429,7 @@ npm run dev            # desenvolvimento
 npm run validar        # roda a trava de validação isoladamente
 npm run build          # valida e constrói (a validação é prebuild)
 npm run placeholders   # gera imagens provisórias que ainda faltam
-npm run og             # regera public/og-image.jpg (1200×630, < 300 KB)
+npm run og             # regera a imagem da prévia do link (1200×630, < 300 KB)
 
 # verificação visual (exige o site rodando em localhost:3100)
 node scripts/verificar-visual.mjs

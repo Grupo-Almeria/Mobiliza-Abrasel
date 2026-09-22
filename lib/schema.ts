@@ -654,6 +654,35 @@ export const EsquemaConfig = z.object({
     ),
   ),
 
+  // Os dois campos abaixo são desenhados DENTRO da imagem da prévia do link,
+  // não no site. Os limites são a largura real da arte: acima deles o texto
+  // encolheria a ponto de não ser legível na miniatura do WhatsApp. É por isso
+  // que a trava recusa — o estouro não apareceria em lugar nenhum antes do
+  // primeiro compartilhamento.
+  ogFrase: textoObrigatorio(
+    'ogFrase',
+    'É a frase desenhada dentro da imagem da prévia do link.',
+    10,
+  ).max(
+    60,
+    erro(
+      'a "ogFrase" passou de 60 caracteres',
+      'Ela aparece em corpo muito grande na imagem da prévia. Acima de 60 caracteres a letra encolhe e deixa de ser legível na miniatura do WhatsApp. Encurte — a frase inteira continua no topo do site.',
+    ),
+  ),
+
+  ogRodape: textoObrigatorio(
+    'ogRodape',
+    'É a linha pequena de contexto no pé da imagem da prévia do link.',
+    4,
+  ).max(
+    48,
+    erro(
+      'o "ogRodape" passou de 48 caracteres',
+      'É a linha miúda no pé da imagem. Encurte para não brigar com o endereço do site, que entra logo abaixo dela.',
+    ),
+  ),
+
   aberturaMural: textoObrigatorio('aberturaMural', 'É o texto de abertura do mural de encontros.', 10).max(
     200,
     erro('a abertura do mural passou de 200 caracteres', 'Encurte.'),
