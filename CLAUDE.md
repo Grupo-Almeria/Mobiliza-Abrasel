@@ -267,9 +267,28 @@ Suba o arquivo novo com o mesmo nome, em "Add file → Upload files".
 
 ### Números do setor
 
-`associados` e `empregos` estão como `null` em `content/config.json` porque ainda
-não foram confirmados pela Abrasel-DF. **Enquanto forem `null`, o bloco de
-números não aparece no site.** Nunca publique estimativa como dado verificado.
+Vivem em `forcaAbrasel.indicadores`, no `config.json`, e aparecem só na faixa
+"A Força da Abrasel-DF" — não se repetem em lugar nenhum.
+
+Os valores são números inteiros **sem aspas e sem ponto**: `16000`, não
+`"16.000"`. O site formata o ponto de milhar sozinho. O `prefixo` é separado do
+valor porque o número é animado e o sinal fica parado ao lado.
+
+São exatamente três indicadores: com mais ou menos, o layout de três colunas
+desequilibra, e a trava recusa.
+
+**A faixa é carvão, não verde, e isso é medição e não gosto:** o número em
+laranja sobre verde dá 2,75:1 e reprova o mínimo de acessibilidade; sobre carvão
+dá 6,28:1. Se alguém trocar o fundo para verde, o número precisa deixar de ser
+laranja.
+
+Os pilares (`Emprego · Renda · Cultura · Segurança`) são conceituais, não
+numéricos: Poppins em caixa alta com espaçamento largo, sem ícone nenhum. A
+especificação original sugeria serifa; vale aqui a mesma decisão da Fase 1, de
+que a identidade vence, e ela proíbe fontes fora do sistema.
+
+Os números continuam pendentes de confirmação pela Abrasel-DF antes da
+publicação no domínio. Nunca publique estimativa como dado verificado.
 
 ### Vídeo institucional
 

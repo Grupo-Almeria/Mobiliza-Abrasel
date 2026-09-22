@@ -110,8 +110,14 @@ async function utilitariosAnulados(pg) {
       if (/\bmt-(?!auto)/.test(cls) && cs.marginTop === '0px') anulou.push('margin-top')
       if (/\bmb-/.test(cls) && cs.marginBottom === '0px') anulou.push('margin-bottom')
       if (/\bp-0\b/.test(cls) && cs.padding !== '0px') anulou.push(`padding=${cs.padding}`)
-      if (/\btext-sm\b/.test(cls) && cs.fontSize !== '14px') anulou.push(`font-size=${cs.fontSize}`)
-      if (/\btext-xs\b/.test(cls) && cs.fontSize !== '12px') anulou.push(`font-size=${cs.fontSize}`)
+      // Um tamanho declarado com variante responsiva (md:text-…) muda de
+      // propósito conforme a largura. Acusar isso seria falso positivo: o que
+      // interessa é o CSS da marca engolindo o utilitário, não o breakpoint.
+      const temVarianteDeTamanho = /\b(sm|md|lg|xl|2xl):text-/.test(cls)
+      if (!temVarianteDeTamanho) {
+        if (/\btext-sm\b/.test(cls) && cs.fontSize !== '14px') anulou.push(`font-size=${cs.fontSize}`)
+        if (/\btext-xs\b/.test(cls) && cs.fontSize !== '12px') anulou.push(`font-size=${cs.fontSize}`)
+      }
       if (/\bborder-2\b/.test(cls) && parseFloat(cs.borderTopWidth) === 0) anulou.push('border-width')
       // `inline-flex` num filho de flex container é blockificado para `flex`
       // pelo próprio CSS. Não é anulação: é comportamento correto da spec.

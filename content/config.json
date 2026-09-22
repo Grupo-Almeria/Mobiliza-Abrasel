@@ -1,5 +1,5 @@
 {
-  "_instrucoes": "Textos e parâmetros do site, editáveis sem mexer em código. Os números do setor (associados e empregos) estão como null porque ainda não foram confirmados pela Abrasel-DF — enquanto forem null, o bloco de números simplesmente não aparece no site. Assim que forem confirmados, troque null pelo número inteiro, sem aspas e sem ponto: 1100, não \"1.100\". Deixe urlVideo como \"\" enquanto o vídeo institucional não estiver no ar; o espaço dele fica reservado na página. O texto do rodapé é provisório e precisa ser substituído pela versão aprovada pelo advogado eleitoral.",
+  "_instrucoes": "Textos e parâmetros do site, editáveis sem mexer em código. Em forcaAbrasel, os valores dos indicadores são números inteiros sem aspas e sem ponto: escreva 16000, não \"16.000\" — o site formata o ponto de milhar sozinho. São exatamente três indicadores, e de dois a seis pilares. Deixe urlVideo como \"\" enquanto o vídeo institucional não estiver no ar; o espaço dele fica reservado na página. O texto do rodapé é provisório e precisa ser substituído pela versão aprovada pelo advogado eleitoral.",
   "urlSite": "https://www.mobilizaabrasel.com.br",
   "fraseHero": "O setor que alimenta Brasília quer um lugar na mesa onde a cidade se decide.",
   "linhaApoio": "Conheça os candidatos que assinaram a Carta de Compromisso da Abrasel-DF.",
@@ -8,9 +8,33 @@
     "Ele nasceu de uma constatação simples: o setor conversa com o poder público o ano inteiro, mas raramente chega à eleição com uma pauta organizada e verificável. A Carta de Compromisso mudou isso. Ela coloca no papel o que o setor precisa, e quem assina passa a ser apresentado aqui.",
     "A Abrasel-DF representa bares, restaurantes e empresas de alimentação fora do lar em todo o Distrito Federal. Um setor que emprega, que forma gente e que mantém a cidade funcionando da manhã à madrugada — com interesse direto em turismo, segurança, transporte e ordenamento urbano."
   ],
-  "associados": null,
-  "empregos": null,
-  "frasePosicionamento": "Um setor que sustenta a economia da cidade e o emprego de quem vive dela.",
+  "forcaAbrasel": {
+    "titulo": "A Força da Abrasel-DF",
+    "subtitulo": "A associação que representa o setor de bares e restaurantes do Distrito Federal",
+    "indicadores": [
+      {
+        "prefixo": "+",
+        "valor": 1000,
+        "rotulo": "empresários associados"
+      },
+      {
+        "prefixo": "+",
+        "valor": 16000,
+        "rotulo": "bares e restaurantes no Distrito Federal"
+      },
+      {
+        "prefixo": "+",
+        "valor": 80000,
+        "rotulo": "empregos com carteira assinada"
+      }
+    ],
+    "pilares": [
+      "Emprego",
+      "Renda",
+      "Cultura",
+      "Segurança"
+    ]
+  },
   "urlVideo": "https://www.youtube.com/shorts/NyRQz0Xfq6k",
   "textoCompartilhamento": "O setor de bares e restaurantes do DF organizou suas pautas em uma Carta de Compromisso. Conheça os candidatos que assinaram: [link]",
   "aberturaMural": "Ouvimos cada candidato antes de qualquer compromisso.",

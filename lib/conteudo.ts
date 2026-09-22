@@ -10,6 +10,7 @@ import {
   partesDaMensagem,
   type Candidato,
   type Config,
+  type ForcaAbrasel,
   type FotoMural,
   type Pauta,
 } from './schema'
@@ -227,4 +228,4 @@ export function lerMural(): FotoMural[] {
   return validado.fotos.filter((foto) => foto.ativo)
 }
 
-export type { Candidato, Config, FotoMural, Pauta }
+export type { Candidato, Config, ForcaAbrasel, FotoMural, Pauta }
