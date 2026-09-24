@@ -300,15 +300,36 @@ de que quem abre no 4G depende.
 O bloco usa *facade*: mostra a miniatura, e o iframe do YouTube — cerca de
 700 KB — só é criado quando alguém clica no play.
 
-**A orientação é detectada pela própria URL.** Um endereço `/shorts/` é sempre
-vertical, por definição da plataforma, e o bloco passa a 9:16 com largura máxima
-de 340px. Qualquer outro formato de endereço rende 16:9. Isso é deliberado: se o
-vídeo for trocado por um 16:9 comum, o bloco volta sozinho ao formato tradicional,
-sem interruptor que alguém precise lembrar de mexer. O `aspect-[9/16]` em
-`VideoFacade.tsx` não é arbitrário — vem daí.
+#### Orientação — a regra, nesta ordem
+
+1. endereço `/shorts/` → **vertical**, sempre. É definição da plataforma, e
+   nenhum campo desliga isso;
+2. qualquer outro endereço → vale o campo `videoVertical` do `config.json`;
+3. campo ausente → horizontal.
+
+Vertical rende `aspect-[9/16]` com largura máxima de 340px; horizontal rende
+`aspect-video`. O `aspect-[9/16]` em `VideoFacade.tsx` não é arbitrário, vem daí.
+
+**A derivação pela URL continua sendo a fonte primária; o campo existe só para o
+silêncio dela.** O desenho original derivava tudo do endereço, para evitar um
+interruptor que alguém precisasse lembrar de mexer. Estava certo, mas incompleto:
+`youtu.be/ID` — a forma que o botão "Compartilhar" do YouTube entrega com mais
+frequência — não diz nada sobre o formato, e o mesmo vale para `watch?v=`. Isso
+não se conserta derivando melhor, porque a informação não está no endereço. E um
+vídeo em pé dentro de moldura 16:9 aparece com tarjas pretas dos dois lados.
+
+Por isso `dadosDoVideo()` devolve `verticalPelaUrl`, e não `vertical`: `false`
+ali significa "o endereço não disse", e não "é horizontal". Só o `true` vence o
+campo. **Não simplifique para `vertical` nem inverta a precedência** — inverter
+faria um `videoVertical: false` esquecido no arquivo achatar um Short.
 
 O vídeo atual é vertical, feito para redes. O briefing previa 16:9; o site foi
 adaptado ao material real, e não o contrário.
+
+Uma coisa que não dá para verificar em sessão de desenvolvimento: **o YouTube é
+bloqueado pelo proxy** — tanto o oEmbed quanto as miniaturas em `i.ytimg.com`
+respondem 403. A miniatura sai quebrada em screenshot local e carrega normalmente
+no site publicado. Se o vídeo abre e é o certo, só o cliente confirma.
 
 Se `urlVideo` estiver vazio, o espaço fica reservado com um aviso, e o layout já
 está resolvido para quando o vídeo chegar.

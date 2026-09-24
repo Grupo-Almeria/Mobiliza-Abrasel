@@ -15,9 +15,10 @@ import { VideoFacade } from '@/components/sobre/VideoFacade'
 type Props = {
   paragrafos: string[]
   urlVideo: string
+  videoVertical: boolean
 }
 
-export function Sobre({ paragrafos, urlVideo }: Props) {
+export function Sobre({ paragrafos, urlVideo, videoVertical }: Props) {
   return (
     <Secao id="sobre" fundo="creme" rotulo="Sobre o Mobiliza">
       <Arcos
@@ -47,7 +48,11 @@ export function Sobre({ paragrafos, urlVideo }: Props) {
         </div>
 
         <div className="lg:sticky lg:top-ma-5">
-          <VideoFacade url={urlVideo} titulo="Mobiliza Abrasel — vídeo institucional" />
+          <VideoFacade
+            url={urlVideo}
+            vertical={videoVertical}
+            titulo="Mobiliza Abrasel — vídeo institucional"
+          />
         </div>
       </div>
     </Secao>
