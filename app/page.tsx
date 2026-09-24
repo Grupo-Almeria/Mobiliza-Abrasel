@@ -35,7 +35,11 @@ export default function Pagina() {
           url={config.urlSite}
         />
 
-        <Sobre paragrafos={config.sobre} urlVideo={config.urlVideo} />
+        <Sobre
+          paragrafos={config.sobre}
+          urlVideo={config.urlVideo}
+          videoVertical={config.videoVertical}
+        />
 
         <ForcaAbrasel dados={config.forcaAbrasel} />
 

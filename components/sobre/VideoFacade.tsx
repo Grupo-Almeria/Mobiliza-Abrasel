@@ -20,34 +20,46 @@ import { evento } from '@/lib/analytics'
 type Props = {
   url: string
   titulo: string
+  /** Só é lido quando o endereço não declara o formato. Ver `dadosDoVideo`. */
+  vertical?: boolean
 }
 
 /**
  * Extrai o id do vídeo e a orientação, das formas usuais de endereço do YouTube.
  *
- * A orientação vem do próprio caminho: `/shorts/` é sempre vertical (9:16), por
- * definição da plataforma. Derivar daí, em vez de criar um campo no config.json,
- * significa que trocar o vídeo por um 16:9 comum devolve o bloco ao formato
- * tradicional sozinho — ninguém precisa lembrar de mexer num interruptor.
+ * A orientação vem do próprio caminho quando ele declara: `/shorts/` é sempre
+ * vertical (9:16), por definição da plataforma. Derivar daí significa que trocar
+ * um Short por um 16:9 comum devolve o bloco ao formato tradicional sozinho, sem
+ * interruptor que alguém precise lembrar de mexer.
+ *
+ * O que essa derivação NÃO cobre: `youtu.be/ID` — a forma que o botão
+ * "Compartilhar" do YouTube entrega com mais frequência — é muda quanto ao
+ * formato, e o mesmo vale para `watch?v=`. Nesses casos a informação não existe
+ * no endereço e não há derivação possível; quem responde é o campo
+ * `videoVertical` do config.json.
+ *
+ * Por isso o campo abaixo se chama `verticalPelaUrl` e não `vertical`: `false`
+ * aqui significa "o endereço não disse", e não "é horizontal". Só o `true` pode
+ * vencer o config.
  */
-function dadosDoVideo(url: string): { id: string; vertical: boolean } | null {
+function dadosDoVideo(url: string): { id: string; verticalPelaUrl: boolean } | null {
   try {
     const endereco = new URL(url)
     const host = endereco.hostname.replace(/^www\./, '')
 
     if (host === 'youtu.be') {
       const id = endereco.pathname.slice(1)
-      return id ? { id, vertical: false } : null
+      return id ? { id, verticalPelaUrl: false } : null
     }
 
     if (endereco.searchParams.has('v')) {
       const id = endereco.searchParams.get('v')
-      return id ? { id, vertical: false } : null
+      return id ? { id, verticalPelaUrl: false } : null
     }
 
     const partes = endereco.pathname.split('/').filter(Boolean)
-    if (partes[0] === 'embed' && partes[1]) return { id: partes[1], vertical: false }
-    if (partes[0] === 'shorts' && partes[1]) return { id: partes[1], vertical: true }
+    if (partes[0] === 'embed' && partes[1]) return { id: partes[1], verticalPelaUrl: false }
+    if (partes[0] === 'shorts' && partes[1]) return { id: partes[1], verticalPelaUrl: true }
 
     return null
   } catch {
@@ -55,10 +67,13 @@ function dadosDoVideo(url: string): { id: string; vertical: boolean } | null {
   }
 }
 
-export function VideoFacade({ url, titulo }: Props) {
+export function VideoFacade({ url, titulo, vertical: verticalPeloConfig = false }: Props) {
   const [tocando, setTocando] = useState(false)
   const dados = dadosDoVideo(url)
-  const vertical = dados?.vertical ?? false
+
+  // Nesta ordem de propósito: o endereço manda quando declara, e o config só
+  // responde pelo silêncio. Assim um `/shorts/` nunca é desligado por engano.
+  const vertical = dados?.verticalPelaUrl || verticalPeloConfig
 
   /**
    * Um 9:16 ocupando a largura inteira da coluna ficaria mais alto que a tela no

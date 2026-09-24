@@ -612,6 +612,25 @@ export const EsquemaConfig = z.object({
       }
     }),
 
+  /**
+   * Formato do vídeo, para o caso em que o endereço não diz.
+   *
+   * A orientação é derivada da URL sempre que ela declara: `/shorts/` é vertical
+   * por definição da plataforma. Mas `youtu.be/ID`, que é a forma que o botão
+   * "Compartilhar" do YouTube entrega com mais frequência, é muda quanto ao
+   * formato — e um vídeo em pé dentro de moldura 16:9 aparece com tarjas pretas
+   * dos dois lados. Este campo cobre esse caso, e só ele: nunca desliga o 9:16
+   * de um endereço `/shorts/`.
+   */
+  videoVertical: z
+    .boolean({
+      invalid_type_error: erro(
+        'o campo "videoVertical" precisa ser true ou false, sem aspas',
+        'Escreva true se o vídeo for em pé (formato de celular) e false se for deitado. Sem aspas em volta: true, e não "true".',
+      ),
+    })
+    .default(false),
+
   forcaAbrasel: EsquemaForcaAbrasel,
 
   dataPleito: z

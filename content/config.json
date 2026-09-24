@@ -1,5 +1,5 @@
 {
-  "_instrucoes": "Textos e parâmetros do site, editáveis sem mexer em código. Em forcaAbrasel, os valores dos indicadores são números inteiros sem aspas e sem ponto: escreva 16000, não \"16.000\" — o site formata o ponto de milhar sozinho. São exatamente três indicadores, e de dois a seis pilares. Deixe urlVideo como \"\" enquanto o vídeo institucional não estiver no ar; o espaço dele fica reservado na página. O texto do rodapé é o aviso institucional oficial do site. ogFrase e ogRodape são o texto desenhado DENTRO da imagem da prévia do link: depois de mudar qualquer um dos dois, rode `npm run og` para redesenhar a imagem.",
+  "_instrucoes": "Textos e parâmetros do site, editáveis sem mexer em código. Em forcaAbrasel, os valores dos indicadores são números inteiros sem aspas e sem ponto: escreva 16000, não \"16.000\" — o site formata o ponto de milhar sozinho. São exatamente três indicadores, e de dois a seis pilares. Deixe urlVideo como \"\" enquanto o vídeo institucional não estiver no ar; o espaço dele fica reservado na página. Marque videoVertical como true se o vídeo for em pé, formato de celular — endereço do tipo youtu.be não diz o formato, e sem isso o vídeo aparece com tarjas pretas dos lados. Endereço /shorts/ dispensa o campo: é sempre vertical. O texto do rodapé é o aviso institucional oficial do site. ogFrase e ogRodape são o texto desenhado DENTRO da imagem da prévia do link: depois de mudar qualquer um dos dois, rode `npm run og` para redesenhar a imagem.",
   "urlSite": "https://www.mobilizaabrasel.com.br",
   "fraseHero": "O setor que alimenta Brasília quer um lugar na mesa onde a cidade se decide.",
   "linhaApoio": "Conheça os candidatos que assinaram a Carta de Compromisso da Abrasel-DF.",
@@ -35,7 +35,8 @@
       "Segurança"
     ]
   },
-  "urlVideo": "https://www.youtube.com/shorts/5miQjyIA2Mk",
+  "urlVideo": "https://youtu.be/MXh5VSDqYbw",
+  "videoVertical": true,
   "textoCompartilhamento": "O setor de bares e restaurantes do DF organizou suas pautas em uma Carta de Compromisso. Conheça os candidatos que assinaram: [link]",
   "ogFrase": "Um lugar na mesa onde a cidade se decide.",
   "ogRodape": "Eleições 2026 · Distrito Federal",
