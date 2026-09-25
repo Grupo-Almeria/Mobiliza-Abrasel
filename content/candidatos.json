@@ -126,6 +126,42 @@
       "foto": "/candidatos/governador-celina-leao.jpg",
       "instagram": "https://www.instagram.com/celinaleao/",
       "ativo": true
+    },
+    {
+      "cargo": "distrital",
+      "nomeUrna": "Júlia Lucy",
+      "numero": "22190",
+      "partido": "PL",
+      "foto": "/candidatos/distrital-julia-lucy.jpg",
+      "instagram": "https://www.instagram.com/julialucydf/",
+      "ativo": true
+    },
+    {
+      "cargo": "distrital",
+      "nomeUrna": "Manuela Andrade",
+      "numero": "20101",
+      "partido": "PODEMOS",
+      "foto": "/candidatos/distrital-manuela-andrade.jpg",
+      "instagram": "https://www.instagram.com/manuelaandrade.df/",
+      "ativo": true
+    },
+    {
+      "cargo": "federal",
+      "nomeUrna": "Thiago Manzoni",
+      "numero": "2233",
+      "partido": "PL",
+      "foto": "/candidatos/federal-thiago-manzoni.jpg",
+      "instagram": "https://www.instagram.com/thiago.manzoni/",
+      "ativo": true
+    },
+    {
+      "cargo": "governador",
+      "nomeUrna": "Kiko Caputo",
+      "numero": "30",
+      "partido": "NOVO",
+      "foto": "/candidatos/governador-kiko-caputo.jpg",
+      "instagram": "https://www.instagram.com/kiko_caputo/",
+      "ativo": true
     }
   ]
 }

@@ -231,6 +231,28 @@ senador e aceitaria um errado de 2 dígitos, invertendo a proteção no cargo ma
 visível do pleito. A regra foi corrigida aqui. Os números reais precisam ser
 conferidos no DivulgaCandContas do TSE antes da publicação.
 
+### O prefixo do número tem que bater com o partido
+
+Os dois primeiros dígitos de um número de urna são o número do partido. A trava
+confere isso, mas **sem tabela de números de partido**: a regra é que um mesmo
+prefixo não pode aparecer com duas siglas diferentes dentro do arquivo.
+
+Existe por causa de um erro real. Chegou "Manuela Andrade, PODEMOS, 22101".
+Passava nas duas regras que já havia — cinco dígitos, número inédito — e o card
+publicaria um número do PL sob a sigla do Podemos. Olhando o site, nada denuncia.
+O correto era 20101.
+
+**Derivar do arquivo em vez de escrever a tabela é decisão, não preguiça.** Uma
+tabela escrita à mão, com um valor errado, passaria a rejeitar dado correto — num
+site eleitoral é o pior resultado possível, porque o build trava e o operador não
+tem como saber que quem está errado é a trava. Aqui a prova sai de dentro do
+arquivo: se cinco candidatos do PL usam 22, um sexto com 22 e outra sigla é
+contradição demonstrável, e a mensagem de erro nomeia o candidato que conflita.
+
+A contrapartida, registrada: um partido que apareça uma vez só não tem com quem
+ser confrontado e passa. **A regra pega colisão, não número inventado.** A
+conferência no DivulgaCandContas do TSE continua sendo obrigatória.
+
 ### As mensagens são para quem não programa
 
 Toda mensagem de erro diz **o que está errado** e **como corrigir**, em
@@ -264,6 +286,18 @@ Mude `"ativo": true` para `"ativo": false`.
 ### Trocar uma foto
 
 Suba o arquivo novo com o mesmo nome, em "Add file → Upload files".
+
+A convenção das fotos de candidato é **JPEG 1000×1000**, enquadramento de cabeça
+e ombros, com folga de 7% a 12% da altura acima da cabeça — foi assim que as
+existentes foram tratadas, e é o que mantém os cards com tratamento idêntico, que
+a conformidade eleitoral exige.
+
+**Foto recortada com fundo transparente precisa ser achatada sobre cinza antes de
+virar JPEG.** O JPEG não tem canal alfa: sem achatar, o fundo transparente sai
+**preto**, e o card fica gritantemente diferente dos outros. O cinza de referência
+é `rgb(176,177,182)`, a média dos fundos já publicados. Quando o recorte não deixa
+folga acima da cabeça, estenda a tela para cima com o mesmo cinza antes de cortar
+— nunca invente fundo de foto com textura, como estante ou parede.
 
 ### Números do setor
 
