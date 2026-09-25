@@ -275,6 +275,50 @@ export const EsquemaCandidatos = z
         vistos.set(chave, { indice, nome: candidato.nomeUrna })
       }
     })
+
+    /*
+     * Os dois primeiros dígitos de um número de urna são o número do partido.
+     * Então um mesmo prefixo não pode aparecer com duas siglas diferentes.
+     *
+     * Existe por causa de um erro real: "Manuela Andrade, PODEMOS, 22101"
+     * passava nas duas regras acima — cinco dígitos, número inédito — e o card
+     * publicaria um número do PL sob a sigla do Podemos. Olhando o site, nada
+     * denuncia. O correto era 20101.
+     *
+     * A regra é derivada do próprio arquivo, de propósito: uma tabela de
+     * números de partido escrita à mão passaria a rejeitar dado correto se
+     * tivesse um valor errado, que num site eleitoral é o pior resultado
+     * possível. Aqui a prova sai de dentro do arquivo — se cinco candidatos do
+     * PL usam 22, um sexto com 22 e outra sigla é contradição demonstrável.
+     *
+     * A contrapartida honesta: um partido que apareça uma vez só não tem com
+     * quem ser confrontado, e passa. A regra pega colisão, não número inventado.
+     */
+    const donoDoPrefixo = new Map<string, { sigla: string; nome: string }>()
+
+    dados.candidatos.forEach((candidato, indice) => {
+      if (!candidato.partido) return
+
+      const prefixo = candidato.numero.slice(0, 2)
+      const sigla = candidato.partido.toUpperCase()
+      const dono = donoDoPrefixo.get(prefixo)
+
+      if (!dono) {
+        donoDoPrefixo.set(prefixo, { sigla, nome: candidato.nomeUrna })
+        return
+      }
+
+      if (dono.sigla !== sigla) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['candidatos', indice, 'numero'],
+          message: erro(
+            `o número ${candidato.numero} começa com ${prefixo}, que neste arquivo é do ${dono.sigla} (${dono.nome}), mas o partido aqui é ${sigla}`,
+            'Todo número de urna começa pelo número do partido. Ou a sigla está errada, ou o número está. Confira no DivulgaCandContas do TSE antes de publicar.',
+          ),
+        })
+      }
+    })
   })
 
 export type Candidato = z.infer<typeof EsquemaCandidato>
