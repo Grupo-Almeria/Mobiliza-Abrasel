@@ -12,4 +12,4 @@ next-env.d.ts
 tsconfig.tsbuildinfo
 
 # PDF gerado sob demanda por `npm run pdf` — nasce do conteúdo, não se versiona
-candidatos-mobiliza-abrasel.pdf
+candidatos-mobiliza-abrasel*.pdf

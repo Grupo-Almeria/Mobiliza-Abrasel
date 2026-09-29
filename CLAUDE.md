@@ -508,6 +508,24 @@ Dois detalhes de layout que custaram iteração e não devem ser desfeitos:
 `DUMP_HTML=/caminho.html npm run pdf` grava o HTML da peça antes de imprimir,
 para medir a paginação no navegador.
 
+#### Tiragem parcial — leia antes de usar
+
+`EXCLUIR="Fulano de Tal" SAIDA_PDF=outro.pdf npm run pdf` deixa nomes de fora.
+
+**O título da peça é "Os candidatos que assinaram a Carta de Compromisso".**
+Excluindo alguém que assinou, o documento afirma uma completude que não tem — num
+material construído inteiro sobre tratamento igual entre candidatos. Se duas
+tiragens circularem lado a lado, a diferença é visível e difícil de explicar.
+
+A chave existe porque foi pedida, com essa ressalva registrada na hora. Quem usar
+responde pela peça, e vale considerar ajustar o título antes de distribuir.
+
+Duas guardas no caminho: nome que não casa com ninguém **derruba a geração** em
+vez de produzir a lista completa em silêncio — um erro de digitação mandaria ao
+ar exatamente o nome que deveria sair —, e o script anuncia no terminal que a
+tiragem é parcial. Dê ao arquivo um nome que não anuncie a omissão para quem
+recebe, já que ele viaja junto com o PDF.
+
 ---
 
 ## Comandos

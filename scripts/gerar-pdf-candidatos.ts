@@ -58,6 +58,30 @@ const QUALIDADE_FOTO = 72
 
 const DESTINO = process.env.SAIDA_PDF ?? path.join(process.cwd(), 'candidatos-mobiliza-abrasel.pdf')
 
+/**
+ * Nomes de urna a deixar de fora desta tiragem, separados por vírgula.
+ *
+ * ┌──────────────────────────────────────────────────────────────────────────┐
+ * │ LEIA ANTES DE USAR.                                                       │
+ * │                                                                           │
+ * │ O título da peça é "Os candidatos que assinaram a Carta de Compromisso".   │
+ * │ Excluindo alguém que assinou, o documento passa a afirmar uma completude   │
+ * │ que não tem — num material construído inteiro sobre tratamento igual       │
+ * │ entre candidatos: cards do mesmo tamanho, ordem neutra, e a frase          │
+ * │ "nenhum candidato recebe destaque sobre os demais".                        │
+ * │                                                                           │
+ * │ Se duas tiragens circularem lado a lado, a diferença é visível.            │
+ * │                                                                           │
+ * │ A chave existe porque foi pedida, com essa ressalva registrada. Use com    │
+ * │ decisão consciente de quem responde pela peça, e considere ajustar o       │
+ * │ título antes de distribuir.                                                │
+ * └──────────────────────────────────────────────────────────────────────────┘
+ */
+const EXCLUIR = (process.env.EXCLUIR ?? '')
+  .split(',')
+  .map((n) => n.trim())
+  .filter(Boolean)
+
 function escapar(texto: string): string {
   return texto.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
@@ -110,9 +134,35 @@ async function cardHtml(c: Candidato): Promise<string> {
     </div></li>`
 }
 
+/**
+ * Aplica o EXCLUIR, **falhando se algum nome não casar com ninguém**.
+ *
+ * A guarda é o ponto principal desta função. Sem ela, um erro de digitação
+ * — "Leando Grass" em vez de "Leandro Grass" — geraria em silêncio o PDF
+ * completo, justamente com o nome que deveria ter saído. Quem pediu a tiragem
+ * enviaria o arquivo errado sem nenhum sinal de que algo falhou.
+ */
+function aplicarExclusoes(candidatos: Candidato[]): Candidato[] {
+  if (EXCLUIR.length === 0) return candidatos
+
+  const naLista = new Set(candidatos.map((c) => c.nomeUrna))
+  const semCorrespondencia = EXCLUIR.filter((nome) => !naLista.has(nome))
+
+  if (semCorrespondencia.length > 0) {
+    console.error(`  ✖  EXCLUIR não encontrou: ${semCorrespondencia.join(', ')}`)
+    console.error('      O nome precisa ser o nomeUrna exato, como está em content/candidatos.json.')
+    console.error(`      Na lista: ${[...naLista].join(', ')}`)
+    process.exit(1)
+  }
+
+  const restantes = candidatos.filter((c) => !EXCLUIR.includes(c.nomeUrna))
+  console.log(`  !  tiragem parcial: ${EXCLUIR.join(', ')} fora — ${restantes.length} de ${candidatos.length}`)
+  return restantes
+}
+
 async function montarHtml(): Promise<string> {
   const config = lerConfig()
-  const candidatos = lerCandidatos()
+  const candidatos = aplicarExclusoes(lerCandidatos())
   const endereco = new URL(config.urlSite).host
 
   const blocos: string[] = []
