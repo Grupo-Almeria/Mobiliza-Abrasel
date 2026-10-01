@@ -162,6 +162,24 @@
       "foto": "/candidatos/governador-kiko-caputo.jpg",
       "instagram": "https://www.instagram.com/kiko_caputo/",
       "ativo": true
+    },
+    {
+      "cargo": "federal",
+      "nomeUrna": "Rodrigo Rollemberg",
+      "numero": "4040",
+      "partido": "PSB",
+      "foto": "/candidatos/federal-rodrigo-rollemberg.jpg",
+      "instagram": "https://www.instagram.com/rollembergpsb/",
+      "ativo": true
+    },
+    {
+      "cargo": "federal",
+      "nomeUrna": "Sandro Avellar",
+      "numero": "4444",
+      "partido": "UNIÃO",
+      "foto": "/candidatos/federal-sandro-avellar.jpg",
+      "instagram": "https://www.instagram.com/sandro.avelar_/",
+      "ativo": true
     }
   ]
 }
