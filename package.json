@@ -10,7 +10,8 @@
     "lint": "next lint",
     "validar": "tsx scripts/validar-conteudo.ts",
     "placeholders": "tsx scripts/gerar-placeholders.ts",
-    "og": "tsx scripts/gerar-og-image.ts"
+    "og": "tsx scripts/gerar-og-image.ts",
+    "pdf": "tsx scripts/gerar-pdf-candidatos.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^1.4.1",

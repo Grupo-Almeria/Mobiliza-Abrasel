@@ -10,3 +10,6 @@ next-env.d.ts
 
 # cache do TypeScript
 tsconfig.tsbuildinfo
+
+# PDF gerado sob demanda por `npm run pdf` — nasce do conteúdo, não se versiona
+candidatos-mobiliza-abrasel*.pdf

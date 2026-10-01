@@ -475,6 +475,57 @@ Regras que valem para qualquer texto novo:
   feita para circular em massa, e está pendente de parecer. Para tirar: apague
   `ogRodape` de `config.json` e rode `npm run og`; nenhum código muda.
 
+### PDF dos candidatos
+
+`npm run pdf` gera `candidatos-mobiliza-abrasel.pdf` na raiz — peça para circular
+por WhatsApp, e-mail ou impressa. **Não é versionado e não fica em `public/`**:
+em `public/` viraria arquivo baixável do site, o que muda o estatuto da peça.
+
+Duas coisas mudam em relação à página, e as duas são deliberadas.
+
+**A ordem.** No site, a ordem dentro de cada cargo é sorteada a cada visita. Um
+PDF não recarrega: congelar um sorteio deixaria uma ordem arbitrária para sempre,
+sem que quem recebe tenha como saber que foi sorteio. Por isso aqui a ordem é
+**alfabética** dentro de cada cargo — neutra e, o que importa no papel,
+verificável. A ordem dos cargos é a mesma do site.
+
+**O texto sobre a ordem.** A frase do site "a ordem de exibição é aleatória e muda
+a cada acesso" **não é reproduzida**, porque no PDF seria falsa. O aviso do
+rodapé vai verbatim, sem uma vírgula alterada, mas rotulado como "Aviso
+institucional do site", já que ele termina falando dessa ordem aleatória. A regra
+do PDF é declarada à parte, no cabeçalho.
+
+Dois detalhes de layout que custaram iteração e não devem ser desfeitos:
+
+- **as fileiras de cards são caixas em linha, não CSS grid.** Medi: com grid o
+  Chromium empurrava um cargo inteiro para a página seguinte e deixava meia
+  página em branco;
+- **os cards têm altura fixa.** Sem ela, um nome que quebra em duas linhas deixa
+  o card mais alto que os vizinhos — card maior é tratamento desigual entre
+  candidatos, que é o que a peça não pode fazer. Um teste no gerador confere que
+  nenhum texto é cortado pela altura fixa.
+
+`DUMP_HTML=/caminho.html npm run pdf` grava o HTML da peça antes de imprimir,
+para medir a paginação no navegador.
+
+#### Tiragem parcial — leia antes de usar
+
+`EXCLUIR="Fulano de Tal" SAIDA_PDF=outro.pdf npm run pdf` deixa nomes de fora.
+
+**O título da peça é "Os candidatos que assinaram a Carta de Compromisso".**
+Excluindo alguém que assinou, o documento afirma uma completude que não tem — num
+material construído inteiro sobre tratamento igual entre candidatos. Se duas
+tiragens circularem lado a lado, a diferença é visível e difícil de explicar.
+
+A chave existe porque foi pedida, com essa ressalva registrada na hora. Quem usar
+responde pela peça, e vale considerar ajustar o título antes de distribuir.
+
+Duas guardas no caminho: nome que não casa com ninguém **derruba a geração** em
+vez de produzir a lista completa em silêncio — um erro de digitação mandaria ao
+ar exatamente o nome que deveria sair —, e o script anuncia no terminal que a
+tiragem é parcial. Dê ao arquivo um nome que não anuncie a omissão para quem
+recebe, já que ele viaja junto com o PDF.
+
 ---
 
 ## Comandos
